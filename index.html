@@ -1,0 +1,3828 @@
+<!DOCTYPE html>
+<html lang="ml" data-theme="cyber-slate">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ശാരിക PRO // Offline Malayalam Touch-Typing &amp; IT Mela Competition Trainer</title>
+  <style>
+    :root {
+      --font-ui: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, Cantarell, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Ubuntu Mono', 'Consolas', monospace;
+      --font-ml: 'Manjari', 'Rachana', 'Chilanka', 'Meera', 'AnjaliOldLipi', 'Noto Sans Malayalam', 'Gayathri', 'Karumbi', 'Nirmala UI', 'Kartika', sans-serif;
+      --typing-font-size: 24px;
+      --typing-line-height: 2.18;
+    }
+
+    /* Theme 1: Cyber-Slate Studio (Dark Mode - Default) */
+    [data-theme="cyber-slate"] {
+      --bg-app: #0B0F19;
+      --bg-surface: #111827;
+      --bg-surface-2: #1E293B;
+      --bg-surface-3: #0F172A;
+      --bg-input: #090D16;
+      --text-primary: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+      --border-color: #1E293B;
+      --border-highlight: #334155;
+      --accent-primary: #10B981;
+      --accent-primary-soft: rgba(16, 185, 129, 0.16);
+      --accent-amber: #F59E0B;
+      --accent-amber-soft: rgba(245, 158, 11, 0.18);
+      --accent-crimson: #F43F5E;
+      --accent-crimson-soft: rgba(244, 63, 94, 0.22);
+      --accent-blue: #38BDF8;
+      --accent-blue-soft: rgba(56, 189, 248, 0.15);
+      --completed-text: #10B981;
+      --completed-bg: rgba(16, 185, 129, 0.08);
+      --active-bg: rgba(245, 158, 11, 0.22);
+      --active-border: #F59E0B;
+      --upcoming-text: #E2E8F0;
+      --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Theme 2: Classic Sarika GTK Ubuntu Mode */
+    [data-theme="gtk-ubuntu"] {
+      --bg-app: #DCDAD5;
+      --bg-surface: #ECEAE4;
+      --bg-surface-2: #DFDDD7;
+      --bg-surface-3: #CFCBC4;
+      --bg-input: #FFFFFF;
+      --text-primary: #2C2C2C;
+      --text-secondary: #555555;
+      --text-muted: #777777;
+      --border-color: #B6B2AA;
+      --border-highlight: #8E8A82;
+      --accent-primary: #2E7D32;
+      --accent-primary-soft: rgba(46, 125, 50, 0.15);
+      --accent-amber: #E95420;
+      --accent-amber-soft: rgba(233, 84, 32, 0.18);
+      --accent-crimson: #C62828;
+      --accent-crimson-soft: rgba(198, 40, 40, 0.2);
+      --accent-blue: #1565C0;
+      --accent-blue-soft: rgba(21, 101, 192, 0.14);
+      --completed-text: #1B5E20;
+      --completed-bg: rgba(46, 125, 50, 0.12);
+      --active-bg: rgba(233, 84, 32, 0.22);
+      --active-border: #E95420;
+      --upcoming-text: #1F1F1F;
+      --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Theme 3: Paper & Ink Daylight (High-Contrast Light) */
+    [data-theme="paper-ink"] {
+      --bg-app: #F3EFE6;
+      --bg-surface: #FAF8F5;
+      --bg-surface-2: #EAE4D7;
+      --bg-surface-3: #E2DAC9;
+      --bg-input: #FFFFFF;
+      --text-primary: #111827;
+      --text-secondary: #374151;
+      --text-muted: #6B7280;
+      --border-color: #D6CFC2;
+      --border-highlight: #B8AFA0;
+      --accent-primary: #047857;
+      --accent-primary-soft: rgba(4, 120, 87, 0.14);
+      --accent-amber: #B45309;
+      --accent-amber-soft: rgba(180, 83, 9, 0.16);
+      --accent-crimson: #BE123C;
+      --accent-crimson-soft: rgba(190, 18, 60, 0.18);
+      --accent-blue: #0369A1;
+      --accent-blue-soft: rgba(3, 105, 161, 0.14);
+      --completed-text: #065F46;
+      --completed-bg: rgba(4, 120, 87, 0.1);
+      --active-bg: rgba(217, 119, 6, 0.22);
+      --active-border: #D97706;
+      --upcoming-text: #111827;
+      --shadow-card: 0 4px 12px rgba(17, 24, 39, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background-color: var(--bg-app);
+      color: var(--text-primary);
+      font-family: var(--font-ui);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Main App Grid */
+    .app-shell {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100%;
+      padding: 6px 10px;
+      gap: 6px;
+    }
+
+    /* Top Telemetry & Control Header - Optimized for Computer Screens (1366x768 & 1920x1080) */
+    .top-header {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 6px 12px;
+      box-shadow: var(--shadow-card);
+      flex-shrink: 0;
+    }
+
+    .header-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .header-bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      width: 100%;
+      padding-top: 4px;
+      border-top: 1px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+
+    .brand-cluster {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      background: var(--bg-surface-2);
+      padding: 4px 9px;
+      border-radius: 7px;
+      border: 1px solid var(--border-highlight);
+      white-space: nowrap;
+    }
+
+    .brand-logo span.ml-title {
+      font-family: var(--font-ml);
+      font-size: 16px;
+      color: var(--accent-primary);
+      font-weight: 700;
+    }
+
+    .candidate-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      background: var(--bg-surface-3);
+      color: var(--text-secondary);
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .candidate-badge:hover {
+      border-color: var(--accent-amber);
+      color: var(--text-primary);
+    }
+
+    .passage-select-wrap {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    select, input[type="text"], input[type="number"], input[type="password"], textarea {
+      background: var(--bg-input);
+      color: var(--text-primary);
+      border: 1px solid var(--border-highlight);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-family: inherit;
+      outline: none;
+    }
+
+    select:focus, input:focus, textarea:focus {
+      border-color: var(--accent-blue);
+    }
+
+    .passage-dropdown {
+      max-width: 250px;
+      font-family: var(--font-ml), var(--font-ui);
+      font-weight: 600;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid var(--border-highlight);
+      background: var(--bg-surface-2);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .btn:hover {
+      filter: brightness(1.1);
+      border-color: var(--accent-blue);
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background: var(--accent-primary);
+      color: #FFFFFF;
+      border-color: var(--accent-primary);
+    }
+
+    .btn-amber {
+      background: var(--accent-amber);
+      color: #FFFFFF;
+      border-color: var(--accent-amber);
+    }
+
+    .btn-crimson {
+      background: var(--accent-crimson);
+      color: #FFFFFF;
+      border-color: var(--accent-crimson);
+    }
+
+    .btn-blue {
+      background: var(--accent-blue);
+      color: #090D16;
+      border-color: var(--accent-blue);
+      font-weight: 700;
+    }
+
+    .btn-sm {
+      padding: 3px 7px;
+      font-size: 11px;
+    }
+
+    /* Center HUD Cards */
+    .hud-metrics {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .hud-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--bg-surface-3);
+      border: 1px solid var(--border-color);
+      border-radius: 7px;
+      padding: 3px 9px;
+      min-width: 88px;
+    }
+
+    .hud-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
+    }
+
+    .hud-value {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .hud-sub {
+      font-size: 10px;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+    }
+
+    /* 5-dot penalty indicator */
+    .penalty-dots {
+      display: inline-flex;
+      gap: 3px;
+      align-items: center;
+    }
+
+    .penalty-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border-highlight);
+      transition: background 0.15s ease;
+    }
+
+    .penalty-dot.filled {
+      background: var(--accent-crimson);
+      box-shadow: 0 0 5px var(--accent-crimson);
+    }
+
+    /* Progress Bar with 60% Qualification Gate */
+    .qual-progress-wrap {
+      position: relative;
+      width: 110px;
+      height: 7px;
+      background: var(--bg-surface-2);
+      border-radius: 4px;
+      overflow: visible;
+      margin-top: 3px;
+      border: 1px solid var(--border-color);
+    }
+
+    .qual-progress-fill {
+      height: 100%;
+      background: var(--accent-blue);
+      border-radius: 3px;
+      width: 0%;
+      transition: width 0.15s ease, background-color 0.2s ease;
+    }
+
+    .qual-progress-fill.qualified {
+      background: var(--accent-primary);
+    }
+
+    .qual-gate-marker {
+      position: absolute;
+      left: 60%;
+      top: -3px;
+      bottom: -3px;
+      width: 2px;
+      background: var(--accent-amber);
+      z-index: 2;
+    }
+
+    .qual-gate-marker::after {
+      content: "60%";
+      position: absolute;
+      top: -11px;
+      left: -8px;
+      font-size: 8px;
+      font-family: var(--font-mono);
+      color: var(--accent-amber);
+      font-weight: 700;
+    }
+
+    /* Timer pulse states */
+    .timer-warn {
+      color: var(--accent-amber) !important;
+      animation: pulseWarn 1s infinite;
+    }
+
+    .timer-critical {
+      color: var(--accent-crimson) !important;
+      animation: pulseCrit 0.5s infinite;
+    }
+
+    @keyframes pulseWarn {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.65; }
+    }
+
+    @keyframes pulseCrit {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    .controls-cluster {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    /* OS English Warning Banner */
+    .os-warning-banner {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--accent-amber-soft);
+      border: 1px solid var(--accent-amber);
+      color: var(--text-primary);
+      padding: 5px 12px;
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .os-warning-banner.visible {
+      display: flex;
+    }
+
+    /* Center Dual-Viewport Typing Arena */
+    .arena-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-height: 0;
+    }
+
+    /* Viewport Shared Card Styling */
+    .viewport-pane {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    .reference-pane {
+      flex: 1.18;
+    }
+
+    .typing-pane {
+      flex: 0.95;
+    }
+
+    .pane-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 5px 12px;
+      background: var(--bg-surface-2);
+      border-bottom: 1px solid var(--border-color);
+      font-size: 12px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+
+    .pane-title-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pane-title {
+      font-weight: 700;
+      color: var(--text-primary);
+      font-family: var(--font-ml), var(--font-ui);
+    }
+
+    .badge-pill {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: var(--bg-surface-3);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-highlight);
+    }
+
+    .pane-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    /* Reference Text Content Area */
+    .reference-scroll-box {
+      position: relative;
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 18px;
+      font-family: var(--font-ml);
+      font-size: var(--typing-font-size);
+      line-height: var(--typing-line-height);
+      letter-spacing: 0.01em;
+      color: var(--upcoming-text);
+      background: var(--bg-input);
+      user-select: none;
+      word-break: break-word;
+    }
+
+    /* Grapheme Cluster Spans */
+    .g-span {
+      display: inline;
+      padding: 1px 1px;
+      border-radius: 4px;
+      transition: background-color 0.08s ease, color 0.08s ease;
+    }
+
+    .g-span.g-done {
+      color: var(--completed-text);
+      background-color: var(--completed-bg);
+    }
+
+    .g-span.g-done-err {
+      color: var(--completed-text);
+      background-color: var(--completed-bg);
+      text-decoration: underline wavy var(--accent-amber);
+      text-underline-offset: 4px;
+    }
+
+    .g-span.g-err-advance {
+      color: #FFFFFF;
+      background-color: var(--accent-crimson);
+      border-radius: 4px;
+    }
+
+    .g-span.g-active {
+      background-color: var(--active-bg);
+      border-bottom: 3px solid var(--active-border);
+      color: var(--text-primary);
+      font-weight: 700;
+      border-radius: 4px;
+      padding: 1px 3px;
+    }
+
+    .g-span.g-active.g-locked-err {
+      background-color: var(--accent-crimson-soft);
+      border-bottom-color: var(--accent-crimson);
+      color: var(--accent-crimson);
+      animation: errShake 0.28s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+
+    @keyframes errShake {
+      10%, 90% { transform: translate3d(-2px, 0, 0); }
+      20%, 80% { transform: translate3d(3px, 0, 0); }
+      30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+      40%, 60% { transform: translate3d(4px, 0, 0); }
+    }
+
+    /* Middle Strip: Live Conjunct Decomposition & Diagnostic Bar */
+    .decomposition-hud {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-highlight);
+      border-radius: 8px;
+      padding: 6px 12px;
+      min-height: 42px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+
+    .decomposition-hud.hidden-exam-mode .decomp-steps-area {
+      visibility: hidden;
+    }
+
+    .decomp-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+
+    .target-grapheme-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      height: 32px;
+      padding: 0 10px;
+      background: var(--accent-amber-soft);
+      border: 1px solid var(--accent-amber);
+      color: var(--text-primary);
+      font-family: var(--font-ml);
+      font-size: 20px;
+      font-weight: 800;
+      border-radius: 6px;
+    }
+
+    .decomp-steps-area {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .cp-step-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-color);
+      font-size: 12px;
+      transition: all 0.12s ease;
+    }
+
+    .cp-step-pill.step-done {
+      background: var(--accent-primary-soft);
+      border-color: var(--accent-primary);
+      color: var(--completed-text);
+      font-weight: 700;
+    }
+
+    .cp-step-pill.step-active {
+      background: var(--accent-amber-soft);
+      border-color: var(--accent-amber);
+      color: var(--text-primary);
+      font-weight: 700;
+      box-shadow: 0 0 0 1px var(--accent-amber);
+    }
+
+    .cp-glyph {
+      font-family: var(--font-ml);
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .cp-key-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 1px 5px;
+      border-radius: 4px;
+      background: var(--bg-surface-3);
+      color: var(--accent-blue);
+      border: 1px solid var(--border-highlight);
+    }
+
+    .cp-hex {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .step-arrow {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    .diagnostic-toast {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: var(--accent-crimson-soft);
+      border: 1px solid var(--accent-crimson);
+      color: var(--text-primary);
+      font-size: 12px;
+      font-weight: 600;
+      max-width: 560px;
+    }
+
+    .diagnostic-toast.visible {
+      display: inline-flex;
+    }
+
+    /* Bottom Active Typing Viewport */
+    .typing-box-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background: var(--bg-input);
+      overflow: hidden;
+    }
+
+    .typing-mirror-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 18px;
+      font-family: var(--font-ml);
+      font-size: var(--typing-font-size);
+      line-height: var(--typing-line-height);
+      color: var(--text-primary);
+      outline: none;
+      cursor: text;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .typing-mirror-area:focus {
+      box-shadow: inset 0 0 0 2px var(--accent-blue);
+    }
+
+    .typed-char-ok {
+      color: var(--text-primary);
+    }
+
+    .typed-char-err {
+      color: #FFFFFF;
+      background-color: var(--accent-crimson);
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+
+    .blinking-caret {
+      display: inline-block;
+      width: 2.5px;
+      height: 1.2em;
+      background-color: var(--accent-amber);
+      vertical-align: text-bottom;
+      margin-left: 1px;
+      animation: caretBlink 0.9s infinite;
+    }
+
+    @keyframes caretBlink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    /* Hidden Input for Native OS IME Mode / Mobile Fallback */
+    .hidden-ime-input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+      width: 1px;
+      height: 1px;
+      left: 0;
+      top: 0;
+    }
+
+    /* Bottom Footer Telemetry Strip */
+    .bottom-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 4px 12px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+
+    .footer-left, .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .sparkline-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    #cpmSparkline {
+      background: var(--bg-surface-3);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+    }
+
+    .shortcut-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .shortcut-pill kbd {
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-highlight);
+      border-radius: 3px;
+      padding: 1px 4px;
+      color: var(--text-secondary);
+    }
+
+    /* Modals & Drawers */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      backdrop-filter: blur(3px);
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-highlight);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 860px;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      background: var(--bg-surface-2);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .modal-header h2 {
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-body {
+      padding: 16px 18px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      background: var(--bg-surface-2);
+      border-top: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* Passage Editor Studio Specifics */
+    .editor-stats-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px;
+    }
+
+    .stat-mini-box {
+      background: var(--bg-surface-3);
+      border: 1px solid var(--border-color);
+      border-radius: 7px;
+      padding: 6px 10px;
+    }
+
+    .stat-mini-box .lbl {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .stat-mini-box .val {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--accent-blue);
+    }
+
+    .editor-textarea {
+      width: 100%;
+      min-height: 220px;
+      font-family: var(--font-ml);
+      font-size: 20px;
+      line-height: 1.95;
+      padding: 12px;
+      resize: vertical;
+    }
+
+    .inspector-preview-box {
+      display: none;
+      padding: 12px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-highlight);
+      border-radius: 8px;
+      font-family: var(--font-ml);
+      font-size: 19px;
+      line-height: 2.0;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+
+    .inspector-preview-box.visible {
+      display: block;
+    }
+
+    .hl-chillu {
+      background: rgba(16, 185, 129, 0.25);
+      border-bottom: 2px solid var(--accent-primary);
+      padding: 0 2px;
+      border-radius: 3px;
+    }
+
+    .hl-conjunct {
+      background: rgba(56, 189, 248, 0.22);
+      border-bottom: 2px solid var(--accent-blue);
+      padding: 0 2px;
+      border-radius: 3px;
+    }
+
+    .hl-legacy-zwj {
+      background: rgba(244, 63, 94, 0.3);
+      border-bottom: 2px solid var(--accent-crimson);
+      padding: 0 2px;
+      border-radius: 3px;
+    }
+
+    /* Grid layouts for forms & scorecards */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .form-field label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-secondary);
+    }
+
+    .score-hero-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+    }
+
+    .score-tile {
+      background: var(--bg-surface-3);
+      border: 1px solid var(--border-highlight);
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .score-tile.hero {
+      border-color: var(--accent-primary);
+      background: var(--accent-primary-soft);
+    }
+
+    .score-tile .t-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .score-tile .t-val {
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--text-primary);
+      margin-top: 2px;
+    }
+
+    .diag-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .diag-table th, .diag-table td {
+      padding: 7px 10px;
+      border-bottom: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .diag-table th {
+      background: var(--bg-surface-2);
+      color: var(--text-secondary);
+      font-weight: 700;
+    }
+
+    .keymapper-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 10px;
+    }
+
+    .chillu-bind-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: var(--bg-surface-3);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+
+    .chillu-big {
+      font-family: var(--font-ml);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--accent-primary);
+    }
+
+    @media (max-width: 900px) {
+      .hud-card {
+        min-width: 72px;
+        padding: 2px 6px;
+      }
+      .hud-value {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- TOP TELEMETRY & CONTROL HEADER -->
+    <header class="top-header">
+      <div class="header-top-row">
+      <div class="brand-cluster">
+        <div class="brand-logo" title="KITE Sarika Inspired Offline Malayalam Typing &amp; CPM Competition Trainer">
+          <span class="ml-title">ശാരിക PRO</span>
+          <span>// SARIKA</span>
+        </div>
+
+        <button type="button" id="btnOpenRegModal" class="candidate-badge" title="Click to configure Candidate Name, Register Number, Competition Level &amp; Exam Password">
+          <span>👤</span>
+          <strong id="hdrCandidateName">Practice Candidate</strong>
+          <span>|</span>
+          <span id="hdrRegNo">LK2026-9042</span>
+          <span id="hdrModeTag" class="badge-pill">Dojo</span>
+        </button>
+
+        <div class="passage-select-wrap">
+          <select id="passageSelect" class="passage-dropdown" aria-label="Select Practice or Competition Passage"></select>
+          <button type="button" id="btnHeaderEditPassage" class="btn btn-amber" title="F3: Directly edit current passage, paste new Malayalam text, or load a local .txt file">
+            ✏️ ഖണ്ഡിക തിരുത്തുക / Custom Text
+          </button>
+        </div>
+      </div>
+
+      <!-- CENTER LIVE NUMERIC HUD CARDS -->
+      <div class="hud-metrics">
+        <div class="hud-card" title="Official Sarika Net Effective Characters Per Minute: (Correct - Wrong/5) / Elapsed Minutes">
+          <div class="hud-label">
+            <span>NET CPM</span>
+            <span id="hdrWpmSub">0 WPM</span>
+          </div>
+          <div class="hud-value" id="hudNetCpm">0.0</div>
+          <div class="hud-sub" id="hudGrossCpm">Gross: 0.0</div>
+        </div>
+
+        <div class="hud-card" title="Typing Accuracy Percentage">
+          <div class="hud-label"><span>കൃത്യത (ACC)</span></div>
+          <div class="hud-value" id="hudAccuracy" style="color: var(--accent-primary);">100.0%</div>
+          <div class="hud-sub" id="hudKeystrokes">0 / 0 keys</div>
+        </div>
+
+        <div class="hud-card" title="Sarika Penalty Rule: Every 5 Wrong Strokes deducts 1 Character from Net Score">
+          <div class="hud-label">
+            <span>ERRORS / PENALTY</span>
+            <div class="penalty-dots" id="penaltyDots">
+              <span class="penalty-dot"></span>
+              <span class="penalty-dot"></span>
+              <span class="penalty-dot"></span>
+              <span class="penalty-dot"></span>
+              <span class="penalty-dot"></span>
+            </div>
+          </div>
+          <div class="hud-value" id="hudErrors">0</div>
+          <div class="hud-sub" id="hudPenaltyDeduct">Penalty: -0.0 chars</div>
+        </div>
+
+        <div class="hud-card" title="IT Mela Rule: Minimum 60% completion required to qualify for Phase 2 Formatting">
+          <div class="hud-label">
+            <span>COMPLETED</span>
+            <span id="hudQualStatus" style="color: var(--accent-amber);">Gate: 60%</span>
+          </div>
+          <div class="hud-value" id="hudCompletionPct">0.0%</div>
+          <div class="qual-progress-wrap">
+            <div class="qual-progress-fill" id="hudProgressFill"></div>
+            <div class="qual-gate-marker" title="60% IT Mela Phase 2 Qualification Threshold"></div>
+          </div>
+        </div>
+
+        <div class="hud-card" title="Competition Countdown / Elapsed Timer">
+          <div class="hud-label">
+            <span id="hudTimerLabel">TIMER (15:00)</span>
+            <select id="quickTimerSelect" style="padding: 0 3px; font-size: 10px; height: 16px;" aria-label="Quick Timer Duration">
+              <option value="60">1m</option>
+              <option value="180">3m</option>
+              <option value="300">5m</option>
+              <option value="600">10m</option>
+              <option value="900" selected>15m (IT Mela)</option>
+              <option value="0">Zen (∞)</option>
+            </select>
+          </div>
+          <div class="hud-value" id="hudTimerDisplay">15:00.0</div>
+          <div class="hud-sub" id="hudTimerState">Ready — Type to start</div>
+        </div>
+      </div>
+
+      </div>
+      <!-- RIGHT CONTROLS -->
+      <div class="header-bottom-row">
+      <div class="controls-cluster" style="width: 100%; justify-content: space-between;">
+        <select id="inputEngineSelect" title="F4: Choose Built-In Hardware Inscript Interceptor (works even when OS is in English) or Native OS IME" aria-label="Keyboard Input Engine">
+          <option value="hardware" selected>⌨️ Built-In Inscript Engine</option>
+          <option value="native">🌐 OS Native Malayalam IME</option>
+        </select>
+
+        <select id="chilluProfileSelect" title="Select Atomic Chillu Physical Shortcut Profile" aria-label="Atomic Chillu Profile">
+          <option value="kite" selected>⚡ Profile 1: KITE Atomic Shortcuts</option>
+          <option value="bis">🇮🇳 Profile 2: BIS Enhanced (AltGr)</option>
+          <option value="custom">🛠️ Profile 3: Custom Key-Mapper</option>
+        </select>
+
+        <button type="button" id="btnOpenKeyMapper" class="btn btn-sm" title="Customize Atomic Chillu physical keys &amp; view Inscript Reference Table">
+          🔧 Key-Mapper
+        </button>
+
+        <select id="enforcementModeSelect" title="Sarika Strict Lock blocks cursor on wrong key; Free-Flow allows advancing &amp; Backspace" aria-label="Typing Enforcement Mode">
+          <option value="strict" selected>🔒 Sarika Strict Lock</option>
+          <option value="freeflow">🔓 Free-Flow + Backspace</option>
+        </select>
+
+        <select id="fontFamilySelect" title="Select locally installed Malayalam system font" aria-label="Malayalam Font Family">
+          <option value="'Manjari', sans-serif">Font: Manjari</option>
+          <option value="'Rachana', serif">Font: Rachana</option>
+          <option value="'Meera', sans-serif">Font: Meera</option>
+          <option value="'Chilanka', cursive">Font: Chilanka</option>
+          <option value="'AnjaliOldLipi', serif">Font: AnjaliOldLipi</option>
+          <option value="'Noto Sans Malayalam', sans-serif">Font: Noto Sans ML</option>
+          <option value="'Gayathri', sans-serif">Font: Gayathri</option>
+          <option value="'Nirmala UI', sans-serif">Font: Nirmala UI</option>
+          <option value="custom">Custom System Font...</option>
+        </select>
+
+        <select id="themeSelect" title="Switch Visual Theme" aria-label="Visual Theme">
+          <option value="cyber-slate" selected>🌙 Cyber-Slate</option>
+          <option value="gtk-ubuntu">🐧 Classic Sarika GTK</option>
+          <option value="paper-ink">☀️ Paper &amp; Ink</option>
+        </select>
+
+        <button type="button" id="btnAudioToggle" class="btn btn-sm" title="Toggle Web Audio Mechanical Key Clicks">
+          🔊 Audio
+        </button>
+
+        <button type="button" id="btnOpenAnalytics" class="btn btn-sm" title="View Historical Progress, Weakest Characters &amp; Past Sessions">
+          📊 History
+        </button>
+
+        <button type="button" id="btnResetSession" class="btn btn-crimson btn-sm" title="Esc: Reset Current Session &amp; Timer">
+          ↺ Reset
+        </button>
+      </div>
+      </div>
+    </header>
+
+    <!-- NATIVE OS IME ENGLISH DETECTION BANNER -->
+    <div id="osEnglishBanner" class="os-warning-banner" role="alert">
+      <span>⚠️ English characters detected from OS! Switch your OS keyboard layout to Malayalam (Super+Space) or click to switch the app to 'Built-In Hardware Inscript Engine'.</span>
+      <button type="button" id="btnSwitchToHardwareEngine" class="btn btn-amber btn-sm">Switch to Built-In Inscript Engine Now</button>
+    </div>
+
+    <!-- EXPANSIVE CENTER DUAL-VIEWPORT TYPING ARENA (ZERO ON-SCREEN KEYBOARD CLUTTER) -->
+    <main class="arena-container">
+      <!-- TOP BOX: REFERENCE PARAGRAPH VIEWPORT -->
+      <section class="viewport-pane reference-pane" aria-label="Reference Paragraph Viewport">
+        <div class="pane-header">
+          <div class="pane-title-group">
+            <span class="pane-title" id="refPassageTitle">4.1 കേരളത്തിന്റെ ഭൂമിശാസ്ത്രവും പ്രകൃതിസമ്പത്തും</span>
+            <span class="badge-pill" id="refCharCountBadge">1,678 codepoints</span>
+            <span class="badge-pill" id="refChilluCountBadge">Atomic Chillus: 0</span>
+          </div>
+          <div class="pane-actions">
+            <button type="button" id="btnEditThisText" class="btn btn-amber btn-sm" title="Directly edit or customize this passage">
+              ✏️ Edit This Text (ഖണ്ഡിക തിരുത്തുക)
+            </button>
+            <button type="button" id="btnNewCustomText" class="btn btn-primary btn-sm" title="Clear and paste or type a brand-new Malayalam passage">
+              ➕ New Custom Text
+            </button>
+            <button type="button" id="btnLoadTxtFileDirect" class="btn btn-sm" title="Load a local UTF-8 .txt file (e.g. typespeed.txt) from your computer">
+              📂 Load .txt File
+            </button>
+            <input type="file" id="directTxtFileInput" accept=".txt,text/plain" style="display: none;" />
+            <button type="button" id="btnPracticeWeakest" class="btn btn-sm" title="Generate a targeted 300-character drill from your top mistake characters">
+              🎯 Drill Weakest Chars
+            </button>
+            <label style="display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text-secondary); cursor: pointer; padding: 2px 6px; background: var(--bg-surface-3); border: 1px solid var(--border-highlight); border-radius: 5px;" title="Automatic paragraph scrolling is OFF by default so you can scroll manually without jumps">
+              <input type="checkbox" id="chkAutoScrollRef" />
+              <span>Auto-Scroll: OFF</span>
+            </label>
+            <div style="display: inline-flex; align-items: center; gap: 3px;">
+              <button type="button" id="btnFontDec" class="btn btn-sm" title="Decrease Passage Font Size">A-</button>
+              <button type="button" id="btnFontInc" class="btn btn-sm" title="Increase Passage Font Size">A+</button>
+            </div>
+          </div>
+        </div>
+        <div id="referenceViewport" class="reference-scroll-box"></div>
+      </section>
+
+      <!-- MIDDLE STRIP: LIVE CONJUNCT DECOMPOSITION & DIAGNOSTIC BAR -->
+      <section id="decompositionHud" class="decomposition-hud" aria-label="Live Conjunct Decomposition and Diagnostic Bar">
+        <div class="decomp-left">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">NEXT GRAPHEME:</span>
+            <span id="hudTargetGrapheme" class="target-grapheme-badge">ഇ</span>
+          </div>
+          <div id="hudDecompSteps" class="decomp-steps-area"></div>
+        </div>
+
+        <div id="diagnosticToast" class="diagnostic-toast" role="status" aria-live="polite"></div>
+
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <label style="display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-secondary); cursor: pointer;">
+            <input type="checkbox" id="chkConvertZwjChillu" checked />
+            <span>Auto-Convert <kbd>്</kbd>+<kbd>]</kbd> ➔ Atomic Chillu</span>
+          </label>
+          <button type="button" id="btnToggleHints" class="btn btn-sm" title="F2: Toggle Conjunct Decomposition Hints for Strict Exam Realism">
+            👁️ Hide Hints (Exam Mode)
+          </button>
+        </div>
+      </section>
+
+      <!-- BOTTOM BOX: ACTIVE TYPING INPUT VIEWPORT -->
+      <section class="viewport-pane typing-pane" aria-label="Active Typing Input Box">
+        <div class="pane-header">
+          <div class="pane-title-group">
+            <span class="pane-title">ടൈപ്പിംഗ് ബോക്സ് (Active Typing Box — Click below &amp; start typing on your physical keyboard)</span>
+            <span class="badge-pill" id="activeInputStatusBadge">🟢 Focusing Physical Keyboard</span>
+          </div>
+          <div class="pane-actions">
+            <button type="button" id="btnFinishEarly" class="btn btn-sm" title="Finish session now and inspect official Sarika Scorecard">
+              🏁 Finish &amp; Evaluate Now
+            </button>
+            <button type="button" id="btnDownloadTypedNow" class="btn btn-sm" title="Export currently typed text as <Register_Number>.txt">
+              💾 Save Typed .txt
+            </button>
+          </div>
+        </div>
+        <div class="typing-box-wrapper" id="typingBoxWrapper">
+          <div
+            id="typingMirrorArea"
+            class="typing-mirror-area"
+            tabindex="0"
+            role="textbox"
+            aria-multiline="true"
+            aria-label="Malayalam Active Typing Box"
+            spellcheck="false"
+          ><span id="typedContentSpan"></span><span class="blinking-caret"></span></div>
+          <textarea
+            id="hiddenImeInput"
+            class="hidden-ime-input"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            aria-hidden="true"
+          ></textarea>
+        </div>
+      </section>
+    </main>
+
+    <!-- BOTTOM FOOTER TELEMETRY STRIP -->
+    <footer class="bottom-footer">
+      <div class="footer-left">
+        <div class="sparkline-wrap">
+          <span style="font-weight: 700;">60s CPM Pace:</span>
+          <canvas id="cpmSparkline" width="140" height="22"></canvas>
+        </div>
+        <span>Index: <strong id="ftrCharIndex" style="font-family: var(--font-mono);">Char 0 / 0 (Grapheme 0 / 0)</strong></span>
+        <span>Rhythm Consistency: <strong id="ftrRhythm" style="font-family: var(--font-mono); color: var(--accent-primary);">100%</strong></span>
+        <span>Last Key Latency: <strong id="ftrLatency" style="font-family: var(--font-mono);">0 ms</strong></span>
+      </div>
+      <div class="footer-right">
+        <span class="shortcut-pill"><kbd>Esc</kbd> Reset</span>
+        <span class="shortcut-pill"><kbd>F2</kbd> Hints</span>
+        <span class="shortcut-pill"><kbd>F3</kbd> Passage Studio</span>
+        <span class="shortcut-pill"><kbd>F4</kbd> Input Engine</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 1: DIRECT IN-PLACE PASSAGE STUDIO (EDIT / CREATE / SANITIZE / SAVE)
+       ========================================================================= -->
+  <div id="passageStudioModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="studioModalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="studioModalTitle">✏️ മലയാളം ഖണ്ഡിക സ്റ്റുഡിയോ (Interactive Passage Editor &amp; Custom Text Studio)</h2>
+        <button type="button" id="btnCloseStudioModal" class="btn btn-sm">✕ Close</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="studioPassageTitle">ഖണ്ഡികയുടെ പേര് (Passage Title)</label>
+            <input type="text" id="studioPassageTitle" placeholder="ഉദാ: എന്റെ പരിശീലന ഖണ്ഡിക - 1" />
+          </div>
+          <div class="form-field">
+            <label for="studioPassageCategory">വിഭാഗം (Category / Competition Level)</label>
+            <select id="studioPassageCategory">
+              <option value="Level 6 — User Custom &amp; Mistake-Targeted Passages (എന്റെ സ്വന്തം ഖണ്ഡികകൾ)">Level 6 — എന്റെ സ്വന്തം ഖണ്ഡികകൾ (User Custom)</option>
+              <option value="Level 4 — Sub-District IT Mela Competition Passages (ഉപജില്ലാ മത്സര ഖണ്ഡികകൾ — 1,500–1,700 Chars)">Level 4 — ഉപജില്ലാ മത്സര ഖണ്ഡികകൾ (Sub-District 1,500–1,700)</option>
+              <option value="Level 5 — District &amp; State Championship Passages (ജില്ലാ-സംസ്ഥാന മത്സര ഖണ്ഡികകൾ — 1,800–2,200+ Chars)">Level 5 — ജില്ലാ-സംസ്ഥാന മത്സര ഖണ്ഡികകൾ (District/State 1,800+)</option>
+              <option value="Level 1 — Home Row &amp; Primary Vowel Signs (മധ്യനിരയും സ്വരചിഹ്നങ്ങളും)">Level 1 — മധ്യനിരയും സ്വരചിഹ്നങ്ങളും</option>
+              <option value="Level 2 — Atomic Chillaksharam Intensive Dojo (ആണവചില്ലുകൾ പ്രത്യേക പരിശീലനം)">Level 2 — ആണവചില്ലുകൾ പ്രത്യേക പരിശീലനം</option>
+              <option value="Level 3 — Complex Koottaksharams (കൂട്ടക്ഷരങ്ങൾ പരിശീലനം)">Level 3 — കൂട്ടക്ഷരങ്ങൾ പരിശീലനം</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Toolbar for File Load, Clear, Sanitizer, and Highlight Preview -->
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; background: var(--bg-surface-2); padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+            <button type="button" id="btnStudioClearNew" class="btn btn-sm">➕ Clear &amp; Create New Passage</button>
+            <button type="button" id="btnStudioOpenTxt" class="btn btn-sm">📂 Open Local .txt File (typespeed.txt)</button>
+            <input type="file" id="studioTxtFileInput" accept=".txt,text/plain" style="display: none;" />
+            <button type="button" id="btnStudioSanitize" class="btn btn-primary btn-sm" title="Convert legacy ZWJ chillus to single-codepoint Atomic Chillus (U+0D7A-U+0D7F), normalize NFC, and fix smart quotes">
+              ✨ Auto-Convert to Official Sarika Standard
+            </button>
+            <button type="button" id="btnStudioToggleHighlight" class="btn btn-sm">
+              🔍 Highlight Chillus &amp; Conjuncts in Editor
+            </button>
+          </div>
+          <span id="studioSanitizeBadge" style="font-size: 11px; color: var(--accent-primary); font-weight: 700;"></span>
+        </div>
+
+        <!-- Live Text Inspector Counters -->
+        <div class="editor-stats-strip">
+          <div class="stat-mini-box">
+            <div class="lbl">Unicode Codepoints</div>
+            <div class="val" id="studioStatCodepoints">0</div>
+          </div>
+          <div class="stat-mini-box">
+            <div class="lbl">Grapheme Clusters</div>
+            <div class="val" id="studioStatGraphemes">0</div>
+          </div>
+          <div class="stat-mini-box">
+            <div class="lbl">Total Words</div>
+            <div class="val" id="studioStatWords">0</div>
+          </div>
+          <div class="stat-mini-box">
+            <div class="lbl">Atomic Chillus (ൺ-ൿ)</div>
+            <div class="val" id="studioStatAtomicChillus" style="color: var(--accent-primary);">0</div>
+          </div>
+          <div class="stat-mini-box">
+            <div class="lbl">Legacy ZWJ Chillus</div>
+            <div class="val" id="studioStatLegacyZwj" style="color: var(--accent-amber);">0</div>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="studioTextarea">മലയാളം ഖണ്ഡിക (Edit existing text, or paste/type any Malayalam article below):</label>
+          <textarea id="studioTextarea" class="editor-textarea" placeholder="ഇവിടെ മലയാളം ഖണ്ഡിക ടൈപ്പ് ചെയ്യുകയോ പേസ്റ്റ് ചെയ്യുകയോ ചെയ്യുക..."></textarea>
+        </div>
+
+        <div id="studioHighlightPreview" class="inspector-preview-box"></div>
+      </div>
+
+      <div class="modal-footer">
+        <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+          <button type="button" id="btnStudioRestoreDefault" class="btn btn-sm" title="Revert modified built-in passage back to factory default text">
+            ↺ Restore Original Default Text
+          </button>
+          <button type="button" id="btnStudioDeleteCustom" class="btn btn-crimson btn-sm" title="Delete this custom passage from library">
+            🗑️ Delete Custom Passage
+          </button>
+          <button type="button" id="btnStudioExportTxt" class="btn btn-sm" title="Save passage to your computer as a UTF-8 .txt file">
+            ⬇️ Export Passage as .txt
+          </button>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <button type="button" id="btnStudioSaveOver" class="btn btn-amber" title="Save modifications directly over the currently selected passage in localStorage">
+            📌 Save Over Current Passage
+          </button>
+          <button type="button" id="btnStudioSaveNew" class="btn btn-blue" title="Add as a brand-new permanent passage in the Passage Selector">
+            ➕ Save as New Custom Passage
+          </button>
+          <button type="button" id="btnStudioApplyNow" class="btn btn-primary" title="Load edited text straight into the typing arena and start practicing immediately">
+            💾 Apply &amp; Practice Immediately
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 2: CANDIDATE REGISTRATION & OFFICIAL EXAM SIMULATION GATE
+       ========================================================================= -->
+  <div id="candidateModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="candModalTitle">
+    <div class="modal-card" style="max-width: 620px;">
+      <div class="modal-header">
+        <h2 id="candModalTitle">🎓 Candidate Registration &amp; IT Mela Session Setup</h2>
+        <button type="button" id="btnCloseCandModal" class="btn btn-sm">✕ Close</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="inpCandidateName">Candidate Name (പേര്)</label>
+            <input type="text" id="inpCandidateName" value="Practice Candidate" placeholder="ഉദാ: അരുൺ കുമാർ" />
+          </div>
+          <div class="form-field">
+            <label for="inpRegisterNumber">Register Number (രജിസ്റ്റർ നമ്പർ — used for .txt export)</label>
+            <input type="text" id="inpRegisterNumber" value="LK2026-9042" placeholder="e.g. LK2026-9042" />
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="inpSessionMode">Session Mode (പരിശീലന രീതി)</label>
+            <select id="inpSessionMode">
+              <option value="dojo" selected>🟢 Practice / Dojo Mode (Instant Start, No Password Gate)</option>
+              <option value="exam">🏆 Official IT Mela Exam Simulation (Requires Sarika Password)</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="inpExamPassword">Competition Password (അടയാളവാക്ക് — default: pass)</label>
+            <input type="password" id="inpExamPassword" placeholder="Enter 'pass' for Official Exam Mode" />
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="inpCompetitionTier">Competition Tier Preset</label>
+            <select id="inpCompetitionTier">
+              <option value="subdistrict">ഉപജില്ലാ മത്സരം (Sub-District: 1,500–1,700 chars, 15 min)</option>
+              <option value="district">ജില്ലാ / സംസ്ഥാന മത്സരം (District/State: 1,800–2,200+ chars, 15 min)</option>
+              <option value="custom">Custom Sprint / Drill Timer</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="inpCustomMinutes">Custom Timer Duration (Minutes: 1–60, or 0 for Untimed Zen)</label>
+            <input type="number" id="inpCustomMinutes" min="0" max="60" value="15" />
+          </div>
+        </div>
+
+        <div id="candAuthError" style="display: none; color: var(--accent-crimson); font-size: 12px; font-weight: 700;">
+          ❌ തെറ്റായ അടയാളവാക്ക്! Official Exam Mode requires the password 'pass'.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <span style="font-size: 11px; color: var(--text-muted);">Official KITE Sarika Rule: 5 Wrong Strokes = 1 Character Deducted; 60% Completion qualifies for Phase 2.</span>
+        <button type="button" id="btnApplyCandidateConfig" class="btn btn-primary">🚀 Save &amp; Launch Session</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 3: CUSTOM ATOMIC CHILLU KEY-MAPPER & INSCRIPT REFERENCE
+       ========================================================================= -->
+  <div id="keyMapperModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="mapperModalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="mapperModalTitle">🔧 Atomic Chillaksharam Key-Mapper &amp; Hardware Inscript Lookup</h2>
+        <button type="button" id="btnCloseKeyMapper" class="btn btn-sm">✕ Close</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 12px; color: var(--text-secondary);">
+          Click any Atomic Chillu button below and press your preferred physical key combination to bind it for <strong>Profile 3 (Custom Key-Mapper)</strong>, or switch between standard KITE and BIS Enhanced profiles.
+        </p>
+
+        <div id="customChilluMapperGrid" class="keymapper-grid"></div>
+
+        <h3 style="font-size: 13px; font-weight: 800; margin-top: 8px;">📖 Complete Malayalam Inscript Hardware Keymap Reference</h3>
+        <div style="max-height: 240px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px;">
+          <table class="diag-table">
+            <thead>
+              <tr>
+                <th>Physical Key</th>
+                <th>Unshifted</th>
+                <th>Shift + Key</th>
+                <th>AltGr (Right-Alt) / Chillu</th>
+              </tr>
+            </thead>
+            <tbody id="inscriptReferenceTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnResetDefaultKeymap" class="btn btn-sm">↺ Reset Default KITE Shortcuts</button>
+        <button type="button" id="btnSaveKeymapClose" class="btn btn-primary">✓ Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 4: OFFICIAL SARIKA POST-COMPETITION SCORECARD MODAL
+       ========================================================================= -->
+  <div id="scorecardModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="scoreModalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="scoreModalTitle">🏆 മൂല്യനിർണ്ണയ ഫലം // Official Sarika Competition Scorecard</h2>
+        <button type="button" id="btnCloseScorecard" class="btn btn-sm">✕ Close</button>
+      </div>
+      <div class="modal-body">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; background: var(--bg-surface-2); padding: 10px 14px; border-radius: 8px;">
+          <div>
+            <div style="font-size: 14px; font-weight: 800;" id="scCandidateLine">Candidate: Practice Candidate (LK2026-9042)</div>
+            <div style="font-size: 12px; color: var(--text-secondary);" id="scPassageLine">Passage: —</div>
+          </div>
+          <div id="scQualificationBadge" class="badge-pill" style="font-size: 13px; font-weight: 800; padding: 5px 12px;">
+            യോഗ്യത നേടി (&gt;= 60%)
+          </div>
+        </div>
+
+        <div class="score-hero-grid">
+          <div class="score-tile hero">
+            <div class="t-label">Net Effective CPM</div>
+            <div class="t-val" id="scNetCpm" style="color: var(--accent-primary);">0.00</div>
+            <div style="font-size: 11px; color: var(--text-secondary);" id="scNetWpm">0.00 Net WPM</div>
+          </div>
+          <div class="score-tile">
+            <div class="t-label">Gross CPM</div>
+            <div class="t-val" id="scGrossCpm">0.00</div>
+            <div style="font-size: 11px; color: var(--text-secondary);" id="scGrossWpm">0.00 Gross WPM</div>
+          </div>
+          <div class="score-tile">
+            <div class="t-label">Accuracy (കൃത്യത)</div>
+            <div class="t-val" id="scAccuracy">100.00%</div>
+            <div style="font-size: 11px; color: var(--text-secondary);" id="scStrokeSummary">0 / 0 Strokes</div>
+          </div>
+          <div class="score-tile">
+            <div class="t-label">Sarika Penalty</div>
+            <div class="t-val" id="scPenaltyExact" style="color: var(--accent-crimson);">-0.00</div>
+            <div style="font-size: 11px; color: var(--text-secondary);" id="scPenaltyFloor">Floor: 0 chars (0 wrong)</div>
+          </div>
+          <div class="score-tile">
+            <div class="t-label">Passage Completed</div>
+            <div class="t-val" id="scCompletedPct">0.00%</div>
+            <div style="font-size: 11px; color: var(--text-secondary);" id="scElapsedTime">Time: 00:00</div>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 4px;">
+          <h3 style="font-size: 13px; font-weight: 800;">🔬 Top 5 Slowest / Most Error-Prone Malayalam Characters &amp; Conjuncts</h3>
+          <button type="button" id="btnScorecardDrillMistakes" class="btn btn-amber btn-sm">
+            🎯 Drill These Mistakes Now
+          </button>
+        </div>
+
+        <table class="diag-table">
+          <thead>
+            <tr>
+              <th>Character / Grapheme</th>
+              <th>Unicode Hex</th>
+              <th>Inscript Key Hint</th>
+              <th>Errors Committed</th>
+              <th>Avg Latency (ms)</th>
+            </tr>
+          </thead>
+          <tbody id="scDiagnosticTableBody"></tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+          <button type="button" id="btnExportTypedTxt" class="btn btn-primary" title="Download exact typed text as <Register_Number>.txt for LibreOffice Writer Phase 2 Formatting">
+            ⬇️ Download Typed File (<span id="scRegFileName">LK2026-9042.txt</span>)
+          </button>
+          <button type="button" id="btnExportScorecardJson" class="btn btn-sm">⬇️ Export Scorecard (.json)</button>
+          <button type="button" id="btnExportScorecardCsv" class="btn btn-sm">⬇️ Export Log (.csv)</button>
+        </div>
+        <button type="button" id="btnScorecardRetry" class="btn btn-blue">↺ Retry Passage</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 5: ANALYTICS & HISTORICAL PROGRESS DRAWER
+       ========================================================================= -->
+  <div id="analyticsModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="analyticsModalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="analyticsModalTitle">📊 Historical Net CPM &amp; Accuracy Telemetry (Offline localStorage)</h2>
+        <button type="button" id="btnCloseAnalytics" class="btn btn-sm">✕ Close</button>
+      </div>
+      <div class="modal-body">
+        <div class="editor-stats-strip">
+          <div class="stat-mini-box">
+            <div class="lbl">Sessions Completed</div>
+            <div class="val" id="histTotalSessions">0</div>
+          </div>
+          <div class="stat-mini-box">
+            <div class="lbl">Personal Best Net CPM</div>
+            <div class="val" id="histBestCpm" style="color: var(--accent-primary);">0.0</div>
+          </div>
+          <div class="stat-mini-box">
+            <div class="lbl">Cumulative Chars Typed</div>
+            <div class="val" id="histTotalChars">0</div>
+          </div>
+          <div class="stat-mini-box">
+            <div class="lbl">Average Accuracy</div>
+            <div class="val" id="histAvgAcc">100.0%</div>
+          </div>
+        </div>
+
+        <div style="background: var(--bg-surface-3); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px;">
+          <div style="font-size: 11px; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px;">NET CPM &amp; ACCURACY TREND CHART</div>
+          <canvas id="historyTrendCanvas" width="780" height="170" style="width: 100%; height: 170px;"></canvas>
+        </div>
+
+        <div style="max-height: 200px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 8px;">
+          <table class="diag-table">
+            <thead>
+              <tr>
+                <th>Date / Time</th>
+                <th>Candidate</th>
+                <th>Passage</th>
+                <th>Net CPM</th>
+                <th>Accuracy</th>
+                <th>Completed</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnClearHistory" class="btn btn-crimson btn-sm">🗑️ Clear Session History</button>
+        <button type="button" id="btnCloseAnalyticsFooter" class="btn btn-primary">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 6: CUSTOM FONT NAME INPUT MODAL (NO BROWSER PROMPT())
+       ========================================================================= -->
+  <div id="customFontModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="customFontModalTitle">
+    <div class="modal-card" style="max-width: 420px;">
+      <div class="modal-header">
+        <h2 id="customFontModalTitle">🔤 Set Custom System Font</h2>
+        <button type="button" id="btnCloseCustomFontModal" class="btn btn-sm">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-field">
+          <label for="inpCustomFontName">Enter locally installed Malayalam font family name:</label>
+          <input type="text" id="inpCustomFontName" placeholder="e.g. Karumbi, RaghuMalayalamSans, Lohit Malayalam" value="Karumbi" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnApplyCustomFont" class="btn btn-primary">Apply Font</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. PRE-LOADED AUTHENTIC MALAYALAM PASSAGES (LEVELS 1 TO 6)
+    // =========================================================================
+    const FACTORY_PASSAGES = [
+  {
+    "id": "lvl1-homerow",
+    "title": "1.1 മധ്യനിരയും സ്വരചിഹ്നങ്ങളും (Home Row & Primary Vowels)",
+    "category": "Level 1 — Home Row & Primary Vowel Signs (മധ്യനിരയും സ്വരചിഹ്നങ്ങളും)",
+    "tier": "Drill",
+    "recommendedMinutes": 3,
+    "text": "പരകത ചട പകര കരത തകര ചകര ടകര പരത കതര ചരട. പോരേ പീരീ പൂരൂ പേര പാര കോര തേര ചാര ടോര. പകൽ കരം തരം ചരം മരം നരം വരം ലയം സരം യമം. പാനീയം കാവേരി താമര ചായം മായം നായകം വായന ലായനി സായം. പൊതുവെ കൗതുകം കൈരളീ പൈതൃകം മനോഹരം നവീകരണം വനമാല സമാനത. പഠനം കരുതൽ തനിമ ചിലന്തി മനോഭാവം നന്മകൾ വലുപ്പം ലളിതം സഹായം യുവത്വം. അവധിക്കാലം ആനന്ദകരം ഇനിമയും ഈണവും ഉണർവും ഊർജ്ജവും എളിമയും ഏകാഗ്രതയും ഐക്യവും ഒത്തൊരുമയും ഓർമ്മകളും ഔന്നിത്യവും."
+  },
+  {
+    "id": "lvl1-vowels-advanced",
+    "title": "1.2 സ്വരാക്ഷരങ്ങളും വ്യഞ്ജനങ്ങളും (Vowels & Consonants Mastery)",
+    "category": "Level 1 — Home Row & Primary Vowel Signs (മധ്യനിരയും സ്വരചിഹ്നങ്ങളും)",
+    "tier": "Drill",
+    "recommendedMinutes": 3,
+    "text": "അ ആ ഇ ഈ ഉ ഊ ഋ എ ഏ ഐ ഒ ഓ ഔ അം അഃ. ക ഖ ഗ ഘ ങ ച ഛ ജ ഝ ഞ ട ഠ ഡ ഢ ണ ത ഥ ദ ധ ന പ ഫ ബ ഭ മ യ ര ല വ ശ ഷ സ ഹ ള ഴ റ. കാകി കുകൂ കൃകെ കേകൈ കൊകോ കൗകം. പാഠശാലയിൽ കുട്ടികൾ മലയാളം അക്ഷരമാല തെറ്റാതെ എഴുതി പഠിക്കുന്നു. സത്യവും ധർമ്മവും നീതിയും പുലരുന്ന സമൂഹമാണ് നമ്മുടെ ലക്ഷ്യം."
+  },
+  {
+    "id": "lvl2-chillus",
+    "title": "2.1 ആണവചില്ലുകൾ പ്രത്യേക പരിശീലനം (Atomic Chillaksharam Intensive Dojo)",
+    "category": "Level 2 — Atomic Chillaksharam Intensive Dojo (ആണവചില്ലുകൾ പ്രത്യേക പരിശീലനം)",
+    "tier": "Drill",
+    "recommendedMinutes": 5,
+    "text": "അവൻ അവർ മലയാളി കൺമണി പാൽ കാൾ വാൾ സർക്കാർ സ്പോർട്സ് സയൻസ് കമ്പ്യൂട്ടർ ലിറ്റിൽ കൈറ്റ്സ് സ്കൂൾ തൊഴിൽ കലാകാരൻ വിദ്യാർത്ഥികൾ. കൺമുന്നിൽ തെളിയുന്ന പൊൻകിരണങ്ങൾ നാടിന്റെ നന്മയ്ക്കായി കരുതിവയ്ക്കാൻ നമുക്ക് കഴിയണം. മലയാള ഭാഷയിൽ ആണവചില്ലുകളായ ൺ, ൻ, ർ, ൽ, ൾ, ൿ എന്നിവയ്ക്ക് അതീവ പ്രാധാന്യമുണ്ട്. പാൽക്കാരൻ രാവിലെതന്നെ വീടുകളിൽ പാൽ എത്തിക്കാൻ സൈക്കിളിൽ യാത്ര തിരിച്ചു. സ്കൂൾ കലോത്സവത്തിൽ പങ്കെടുത്ത കലാകാരൻമാർക്കും അധ്യാപകർക്കും നാട്ടുകാർക്കും സർക്കാർ അഭിനന്ദനങ്ങൾ നേർന്നു. തൊഴിൽമേഖലയിൽ നൂതനമായ മാറ്റങ്ങൾ കൊണ്ടുവരാൻ കമ്പ്യൂട്ടർ പഠനവും സയൻസ് ഗവേഷണവും വിദ്യാർത്ഥികളെ പ്രാപ്തരാക്കുന്നു. വാൾത്തലപ്പുകൊണ്ടല്ല, അറിവിന്റെയും സ്നേഹത്തിന്റെയും പൊൻവെളിച്ചംകൊണ്ടാണ് മനുഷ്യൻ ലോകം കീഴടക്കേണ്ടത്."
+  },
+  {
+    "id": "lvl3-conjuncts",
+    "title": "3.1 കൂട്ടക്ഷരങ്ങൾ പരിശീലനം (Complex Koottaksharams Drill)",
+    "category": "Level 3 — Complex Koottaksharams (കൂട്ടക്ഷരങ്ങൾ പരിശീലനം)",
+    "tier": "Drill",
+    "recommendedMinutes": 5,
+    "text": "അക്കരെ പച്ചപ്പുള്ള തോട്ടത്തിൽ മുത്തശ്ശിയും കുട്ടികളും ഒത്തുകൂടി സന്തോഷത്തോടെ പാട്ടുകൾ പാടി. ക്ക, ച്ച, ട്ട, ത്ത, പ്പ, മ്മ, ന്ന, ല്ല, ള്ള, വ്വ, ങ്ക, ങ്ങ, ഞ്ച, ഞ്ഞ, ണ്ട, ണ്ണ, ന്ത, ന്ദ, ന്ധ, മ്പ, ക്ഷ, ന്റ, റ്റ, ജ്ഞ, ത്ര, ക്ര, പ്ര, ്യ, ്വ, ്ല എന്നീ കൂട്ടക്ഷരങ്ങൾ തെറ്റുകൂടാതെ വേഗത്തിൽ ടൈപ്പ് ചെയ്യാൻ നിരന്തരമായ പരിശീലനം അത്യന്താപേക്ഷിതമാണ്. തിങ്കളാഴ്ച രാവിലെ മഞ്ചേരിയിലെ പൂന്തോട്ടത്തിൽ വിരിഞ്ഞ മഞ്ഞപ്പൂക്കൾ കാണാൻ നിരവധി സഞ്ചാരികൾ എത്തിച്ചേർന്നു. ശാസ്ത്രസാങ്കേതിക രംഗത്തെ പ്രായോഗിക ജ്ഞാനവും അച്ചടക്കവും നമ്മുടെ വ്യക്തിത്വ വികസനത്തിന് കരുത്തേകുന്നു. കൃത്യനിഷ്ഠയോടെയുള്ള പ്രവർത്തികളും സ്വതന്ത്ര സോഫ്റ്റ്‌വെയർ ഉപയോഗവും വിദ്യാലയങ്ങളിൽ വലിയ മാറ്റങ്ങൾ സൃഷ്ടിച്ചിട്ടുണ്ട്. ഭാരതത്തിന്റെ സാംസ്കാരിക പൈതൃകവും പ്രകൃതിഭംഗിയും സംരക്ഷിക്കാൻ ഓരോ പൗരനും പ്രതിജ്ഞാബദ്ധനാണ്."
+  },
+  {
+    "id": "lvl4-subdistrict-a",
+    "title": "4.1 കേരളത്തിന്റെ ഭൂമിശാസ്ത്രവും പ്രകൃതിസമ്പത്തും (Sub-District Passage A)",
+    "category": "Level 4 — Sub-District IT Mela Competition Passages (ഉപജില്ലാ മത്സര ഖണ്ഡികകൾ — 1,500–1,700 Chars)",
+    "tier": "Sub-District",
+    "recommendedMinutes": 15,
+    "text": "ഇന്ത്യയുടെ തെക്കുപടിഞ്ഞാറൻ അറ്റത്ത് അറബിക്കടലിനും സഹ്യപർവ്വതത്തിനും ഇടയിലായി സ്ഥിതിചെയ്യുന്ന മനോഹരമായ ഒരു കൊച്ചു സംസ്ഥാനമാണ് കേരളം. ഭൂമിശാസ്ത്രപരമായി മലനാട്, ഇടനാട്, തീരപ്രദേശം എന്നിങ്ങനെ മൂന്ന് പ്രധാന മേഖലകളായി നമ്മുടെ നാടിനെ തരംതിരിച്ചിരിക്കുന്നു. കിഴക്കൻ അതിർത്തിയിൽ കോട്ടപോലെ തലയുയർത്തി നിൽക്കുന്ന പശ്ചിമഘട്ട മലനിരകൾ കേരളത്തിന്റെ കാലാവസ്ഥയെയും ജലസമ്പത്തിനെയും നിയന്ത്രിക്കുന്നതിൽ നിർണ്ണായകമായ പങ്കുവഹിക്കുന്നു. ലോകത്തിലെതന്നെ ഏറ്റവും പ്രധാനപ്പെട്ട ജൈവവൈവിധ്യ കേന്ദ്രങ്ങളിലൊന്നായി യുനെസ്കോ അംഗീകരിച്ച പശ്ചിമഘട്ടത്തിൽ ആയിരക്കണക്കിന് അപൂർവ്വ സസ്യജന്തുജാലങ്ങൾ അധിവസിക്കുന്നുണ്ട്. ആനമുടിയാണ് കേരളത്തിലെയും ദക്ഷിണേന്ത്യയിലെയും ഏറ്റവും ഉയരം കൂടിയ കൊടുമുടി. ഇടുക്കി ജില്ലയിലെ ഇരവികുളം ദേശീയോദ്യാനത്തിലാണ് ഈ കൊടുമുടി സ്ഥിതിചെയ്യുന്നത്. കേരളത്തിലൂടെ ഒഴുകുന്ന നാൽപ്പത്തിനാല് നദികളിൽ നാൽപ്പത്തിയൊന്നും പടിഞ്ഞാറോട്ട് ഒഴുകുമ്പോൾ, കബനി, ഭവാനി, പാമ്പാർ എന്നീ മൂന്ന് നദികൾ കിഴക്കോട്ട് ഒഴുകുന്നു. പെരിയാർ, ഭാരതപ്പുഴ, പമ്പ, ചാലിയാർ, ചാലക്കുടിപ്പുഴ എന്നിവയാണ് നമ്മുടെ നാട്ടിലെ പ്രധാന നദികൾ. ഈ നദികൾ കാർഷിക മേഖലയ്ക്കും കുടിവെള്ള വിതരണത്തിനും ജലവൈദ്യുത പദ്ധതികൾക്കും ജീവവായുവായി മാറുന്നു. കായലുകളും അഴിമുഖങ്ങളും കണ്ടൽക്കാടുകളും നിറഞ്ഞ തീരപ്രദേശം കേരളത്തിന് മാത്രം സ്വന്തമായ ഒരു സവിശേഷ ആവാസവ്യവസ്ഥയാണ്. വേമ്പനാട്ട് കായലും അഷ്ടമുടിക്കായലും ശാസ്താംകോട്ട തടാകവും വിനോദസഞ്ചാര മേഖലയ്ക്ക് വലിയ സംഭാവനകൾ നൽകുന്നു. ഇടവപ്പാതി എന്നറിയപ്പെടുന്ന തെക്കുപടിഞ്ഞാറൻ മൺസൂണും തുലാവർഷം എന്നറിയപ്പെടുന്ന വടക്കുകിഴക്കൻ മൺസൂണുമാണ് കേരളത്തിൽ സമൃദ്ധമായി മഴ ലഭിക്കാൻ സഹായിക്കുന്നത്. മണ്ണും ജലവും വനസമ്പത്തും വരുംതലമുറയ്ക്കായി കരുതിവയ്ക്കേണ്ടത് ഓരോ മലയാളിയുടെയും കടമയാണ്. പ്രകൃതിയോട് ഇണങ്ങിനിന്നുകൊണ്ടുള്ള സുസ്ഥിര വികസന മാതൃകകൾ സ്വീകരിച്ചാൽ മാത്രമേ നമ്മുടെ നാടിന്റെ പച്ചപ്പും മനോഹാരിതയും എന്നും നിലനിർത്താൻ സാധിക്കുകയുള്ളൂ."
+  },
+  {
+    "id": "lvl4-subdistrict-b",
+    "title": "4.2 പൊതുവിദ്യാഭ്യാസവും ലിറ്റിൽ കൈറ്റ്സ് പദ്ധതിയും (Sub-District Passage B)",
+    "category": "Level 4 — Sub-District IT Mela Competition Passages (ഉപജില്ലാ മത്സര ഖണ്ഡികകൾ — 1,500–1,700 Chars)",
+    "tier": "Sub-District",
+    "recommendedMinutes": 15,
+    "text": "കേരളത്തിന്റെ പൊതുവിദ്യാഭ്യാസ മേഖലയിൽ വിവരസാങ്കേതികവിദ്യയുടെ സഹായത്തോടെ നടപ്പിലാക്കിയ വിപ്ലവകരമായ മാറ്റങ്ങൾ ഇന്ന് ദേശീയതലത്തിൽത്തന്നെ വലിയ ശ്രദ്ധ നേടിയിട്ടുണ്ട്. കേരള ഇൻഫ്രാസ്ട്രക്ചർ ആൻഡ് ടെക്നോളജി ഫോർ എഡ്യൂക്കേഷൻ അഥവാ കൈറ്റ് വഴി സംസ്ഥാനത്തെ മുഴുവൻ സർക്കാർ, എയ്ഡഡ് വിദ്യാലയങ്ങളിലെയും ക്ലാസ് മുറികൾ ഹൈടെക് നിലവാരത്തിലേക്ക് ഉയർത്താൻ സാധിച്ചു. ലാപ്ടോപ്പുകൾ, മൾട്ടിമീഡിയ പ്രൊജക്ടറുകൾ, ശബ്ദസംവിധാനങ്ങൾ, അതിവേഗ ഇന്റർനെറ്റ് സൗകര്യങ്ങൾ എന്നിവ ഉൾപ്പെടുന്ന ഡിജിറ്റൽ ക്ലാസ് മുറികൾ പഠനപ്രവർത്തനങ്ങളെ കൂടുതൽ ആകർഷകവും ലളിതവുമാക്കി മാറ്റിയിരിക്കുന്നു. പൂർണ്ണമായും സ്വതന്ത്ര സോഫ്റ്റ്‌വെയർ അടിസ്ഥാനമാക്കിയുള്ള കൈറ്റ് ഗ്നു/ലിനക്സ് ഓപ്പറേറ്റിംഗ് സിസ്റ്റമാണ് നമ്മുടെ സ്കൂൾ കമ്പ്യൂട്ടർ ലാബുകളിൽ ഉപയോഗിക്കുന്നത്. ഇതിലൂടെ കോടിക്കണക്കിന് രൂപയുടെ ലൈസൻസ് ഫീസ് ലാഭിക്കാൻ കഴിഞ്ഞുവെന്ന് മാത്രമല്ല, സോഫ്റ്റ്‌വെയറുകൾ സ്വന്തമായി പഠിക്കാനും തിരുത്തിയെഴുതാനും പങ്കുവയ്ക്കാനുമുള്ള സ്വാതന്ത്ര്യം വിദ്യാർത്ഥികൾക്ക് ലഭിക്കുകയും ചെയ്തു. ഇന്ത്യയിലെ ഏറ്റവും വലിയ കുട്ടികളുടെ ഐ.ടി. കൂട്ടായ്മയായ ലിറ്റിൽ കൈറ്റ്സ് പദ്ധതി വിദ്യാർത്ഥികളുടെ സാങ്കേതിക നൈപുണ്യം വികസിപ്പിക്കുന്നതിൽ അതുല്യമായ പങ്കാണ് വഹിക്കുന്നത്. അനിമേഷൻ, സൈബർ സുരക്ഷ, മലയാളം കമ്പ്യൂട്ടിംഗ്, ആർട്ടിഫിഷ്യൽ ഇന്റലിജൻസ്, റോബോട്ടിക്സ്, മൊബൈൽ ആപ്പ് നിർമ്മാണം തുടങ്ങിയ മേഖലകളിൽ ലിറ്റിൽ കൈറ്റ്സ് അംഗങ്ങൾക്ക് വിദഗ്ധ പരിശീലനം നൽകിവരുന്നു. സ്കൂൾ ശാസ്ത്രോത്സവത്തിന്റെ ഭാഗമായി നടത്തപ്പെടുന്ന ഐ.ടി. മേളയിൽ മലയാളം ടൈപ്പിംഗും രൂപകൽപ്പനയും കുട്ടികളുടെ ഭാഷാപരമായ കഴിവും കമ്പ്യൂട്ടർ വേഗതയും ഒരേസമയം പരീക്ഷിക്കുന്ന പ്രധാന മത്സരയിനമാണ്. ശാരിക എന്ന സ്വതന്ത്ര സോഫ്റ്റ്‌വെയർ ഉപയോഗിച്ച് നിശ്ചിത സമയത്തിനുള്ളിൽ അക്ഷരത്തെറ്റില്ലാതെ വേഗത്തിൽ മലയാളം യൂണിക്കോഡ് അക്ഷരങ്ങൾ ടൈപ്പ് ചെയ്ത് പരിശീലിക്കുന്നത് ഭാവിയിൽ കുട്ടികൾക്ക് വലിയ മുതൽക്കൂട്ടാകും."
+  },
+  {
+    "id": "lvl4-subdistrict-c",
+    "title": "4.3 മലയാള സാഹിത്യവും ഭാഷാ ചരിത്രവും (Sub-District Passage C)",
+    "category": "Level 4 — Sub-District IT Mela Competition Passages (ഉപജില്ലാ മത്സര ഖണ്ഡികകൾ — 1,500–1,700 Chars)",
+    "tier": "Sub-District",
+    "recommendedMinutes": 15,
+    "text": "ദ്രാവിഡ ഭാഷാഗോത്രത്തിലെ പ്രധാനപ്പെട്ട ഒരു ഭാഷയായ മലയാളത്തിന് നൂറ്റാണ്ടുകളുടെ സമ്പന്നമായ സാഹിത്യ-സാംസ്കാരിക ചരിത്രമാണുള്ളത്. വാമൊഴിപ്പാട്ടുകളിലൂടെയും നാടൻ കലാരൂപങ്ങളിലൂടെയും വളർന്നുവന്ന നമ്മുടെ ഭാഷയ്ക്ക് കൃത്യമായ ലിപിയും കാവ്യരൂപവും കൈവന്നത് മധ്യകാലഘട്ടത്തിലാണ്. ചീരാമകവിയുടെ രാമചരിതവും കണ്ണശ്ശ കവികളുടെ കൃതികളും ചെറുശ്ശേരിയുടെ കൃഷ്ണഗാഥയും പ്രാചീന മലയാള കാവ്യശാഖയ്ക്ക് കരുത്തുറ്റ അടിത്തറ പാകി. തുഞ്ചത്ത് രാമാനുജൻ എഴുത്തച്ഛനാണ് ആധുനിക മലയാള ഭാഷയുടെ പിതാവായി അറിയപ്പെടുന്നത്. അധ്യാത്മരാമായണം കിളിപ്പാട്ട്, മഹാഭാരതം കിളിപ്പാട്ട് എന്നീ ഇതിഹാസ കൃതികളിലൂടെ അദ്ദേഹം മലയാള ഭാഷയെ സംസ്കൃത പദസമ്പത്തുമായി സമന്വയിപ്പിച്ച് ജനകീയമാക്കി മാറ്റി. തുള്ളൽ പ്രസ്ഥാനത്തിന്റെ ഉപജ്ഞാതാവായ കുഞ്ചൻ നമ്പ്യാർ സാധാരണക്കാരുടെ ഭാഷയിൽ സാമൂഹിക വിമർശനവും നർമ്മവും കലർത്തി കവിതകളെ സാധാരണ ജനങ്ങളിലേക്ക് അടുപ്പിച്ചു. ഇരുപതാം നൂറ്റാണ്ടിന്റെ തുടക്കത്തിൽ കുമാരനാശാൻ, ഉള്ളൂർ എസ്. പരമേശ്വരയ്യർ, വള്ളത്തോൾ നാരായണമേനോൻ എന്നീ മഹാകവിത്രയങ്ങൾ മലയാള കവിതയിൽ കാൽപ്പനിക വസന്തം വിരിയിച്ചു. ചന്തുമേനോന്റെ ഇന്ദുലേഖയിലൂടെയും സി.വി. രാമൻപിള്ളയുടെ ചരിത്രാഖ്യായികകളിലൂടെയും വളർന്ന മലയാള നോവൽ സാഹിത്യം തകഴി ശിവശങ്കരപ്പിള്ള, വൈക്കം മുഹമ്മദ് ബഷീർ, എസ്.കെ. പൊറ്റെക്കാട്ട്, എം.ടി. വാസുദേവൻ നായർ എന്നിവരിലൂടെ ലോകസാഹിത്യത്തിന്റെ നെറുകയിലെത്തി. അച്ചടിയന്ത്രങ്ങളുടെ വരവോടെ വളർന്ന മലയാള ലിപി ഇന്ന് കമ്പ്യൂട്ടറിന്റെയും സ്മാർട്ട്ഫോണുകളുടെയും യുഗത്തിൽ യൂണിക്കോഡ് സാങ്കേതികവിദ്യയിലൂടെ ആഗോളതലത്തിൽ വായിക്കപ്പെടുന്നു. വിക്കിപീഡിയ, സ്വതന്ത്ര മലയാളം കമ്പ്യൂട്ടിംഗ്, ഡിജിറ്റൽ നിഘണ്ടുക്കൾ, ഇ-വായനശാലകൾ എന്നിവ വഴി നമ്മുടെ മാതൃഭാഷ വിവരസാങ്കേതികവിദ്യയുടെ പുത്തൻ ആകാശങ്ങൾ കീഴടക്കിക്കൊണ്ടിരിക്കുകയാണ്. മാതൃഭാഷയെ സ്നേഹിക്കുകയും വിജ്ഞാനഭാഷയായി വളർത്തുകയും ചെയ്യുമ്പോഴാണ് ഒരു ജനതയുടെ സർഗ്ഗാത്മകത പൂർണ്ണത കൈവരിക്കുന്നത്."
+  },
+  {
+    "id": "lvl5-district-d",
+    "title": "5.1 ബഹിരാകാശ ഗവേഷണവും ആധുനിക ഭൗതികശാസ്ത്രവും (District/State Passage D)",
+    "category": "Level 5 — District & State Championship Passages (ജില്ലാ-സംസ്ഥാന മത്സര ഖണ്ഡികകൾ — 1,800–2,200+ Chars)",
+    "tier": "District / State",
+    "recommendedMinutes": 15,
+    "text": "മനുഷ്യരാശിയുടെ ജിജ്ഞാസയുടെയും ശാസ്ത്രീയ അന്വേഷണങ്ങളുടെയും ഏറ്റവും വലിയ പരീക്ഷണശാലയാണ് അനന്തമായ പ്രപഞ്ചവും ബഹിരാകാശവും. ഇന്ത്യൻ ബഹിരാകാശ ഗവേഷണ സംഘടനയായ ഐ.എസ്.ആർ.ഒ. (ISRO - Indian Space Research Organisation) കുറഞ്ഞ ചെലവിൽ കൈവരിച്ച ചരിത്രപരമായ നേട്ടങ്ങൾ ലോകരാജ്യങ്ങളെപ്പോലും അത്ഭുതപ്പെടുത്തിയിട്ടുണ്ട്. 1963 നവംബർ 21-ന് തിരുവനന്തപുരത്തെ തുമ്പയിൽനിന്ന് ആദ്യത്തെ പരീക്ഷണ റോക്കറ്റ് വിക്ഷേപിച്ചതുമുതൽ ആരംഭിച്ച ഇന്ത്യയുടെ ബഹിരാകാശ യാത്ര ഇന്ന് ചന്ദ്രനിലും ചൊവ്വയിലും സൂര്യന്റെ പഠനമേഖലകളിലും എത്തിനിൽക്കുന്നു. ഡോ. വിക്രം സാരാഭായിയുടെ ദീർഘവീക്ഷണവും ഡോ. എ.പി.ജെ. അബ്ദുൾ കലാം, സതീഷ് ധവാൻ, ഡോ. കെ. കസ്തൂരിരംഗൻ, ജി. മാധവൻ നായർ, എസ്. സോമനാഥ് തുടങ്ങിയ ശാസ്ത്രജ്ഞരുടെ കഠിനാധ്വാനവുമാണ് ഈ വിജയങ്ങൾക്ക് പിന്നിലെ ചാലകശക്തി. 2008-ലെ ചന്ദ്രയാൻ-1 ദൗത്യത്തിലൂടെ ചന്ദ്രോപരിതലത്തിൽ ജലാംശത്തിന്റെ സാന്നിധ്യം കണ്ടെത്താൻ ഇന്ത്യയ്ക്ക് സാധിച്ചു. തുടർന്ന് 2023 ഓഗസ്റ്റ് 23-ന് ചന്ദ്രയാൻ-3 ദൗത്യത്തിലെ വിക്രം ലാൻഡറും പ്രജ്ഞാൻ റോവറും ചന്ദ്രന്റെ ദക്ഷിണധ്രുവത്തിൽ സുരക്ഷിതമായി ഇറങ്ങിയതോടെ ആ നേട്ടം കൈവരിക്കുന്ന ലോകത്തിലെ ആദ്യ രാജ്യമായി ഇന്ത്യ മാറി. ചൊവ്വാ ഗ്രഹത്തിന്റെ ഭ്രമണപഥത്തിൽ ആദ്യ ശ്രമത്തിൽത്തന്നെ പ്രവേശിച്ച മംഗൾയാൻ (MOM) ദൗത്യവും, സൂര്യന്റെ അന്തരീക്ഷമായ കൊറോണയെക്കുറിച്ച് പഠിക്കാൻ വിക്ഷേപിച്ച ആദിത്യ-എൽ1 (Aditya-L1) പേടകവും നമ്മുടെ ശാസ്ത്രസാങ്കേതിക മികവിന്റെ തിളങ്ങുന്ന ഉദാഹരണങ്ങളാണ്. ബഹിരാകാശത്തേക്ക് ഇന്ത്യക്കാരെ അയക്കുന്ന 'ഗഗൻയാൻ' പദ്ധതിയും സ്വന്തമായി ബഹിരാകാശ നിലയം സ്ഥാപിക്കാനുള്ള തയ്യാറെടുപ്പുകളും വരുംവർഷങ്ങളിൽ ഇന്ത്യയെ ബഹിരാകാശ രംഗത്തെ ഒന്നാംനിര ശക്തിയാക്കി മാറ്റും. ആധുനിക ഭൗതികശാസ്ത്രത്തിൽ ആൽബർട്ട് ഐൻസ്റ്റീൻ ആവിഷ്കരിച്ച ആപേക്ഷികതാ സിദ്ധാന്തവും (Theory of Relativity) ക്വാണ്ടം ബലതന്ത്രവും (Quantum Mechanics) പ്രപഞ്ചരഹസ്യങ്ങളെ മനസ്സിലാക്കാൻ പുതിയ വാതായനങ്ങൾ തുറന്നുതന്നു. തമോഗർത്തങ്ങൾ (Black Holes), ഗുരുത്വാകർഷണ തരംഗങ്ങൾ (Gravitational Waves), സ്ഥല-കാല വക്രത (Spacetime Curvature) എന്നിവയെക്കുറിച്ചുള്ള ഗവേഷണങ്ങൾ പ്രപഞ്ചത്തിന്റെ ഉൽപ്പത്തിയെക്കുറിച്ചുള്ള മഹാവിസ്ഫോടന സിദ്ധാന്തത്തിന് (Big Bang Theory) കൂടുതൽ തെളിവുകൾ നൽകുന്നു. വാർത്താവിനിമയം, കാലാവസ്ഥാ പ്രവചനം, ദുരന്തനിവാരണം, കൃഷി, വിദൂര സംവേദനം (Remote Sensing), നാവിഗേഷൻ എന്നീ മേഖലകളിൽ കൃത്രിമ ഉപഗ്രഹങ്ങൾ നൽകുന്ന സേവനങ്ങൾ സാധാരണ മനുഷ്യരുടെ ദൈനംദിന ജീവിതം കൂടുതൽ സുരക്ഷിതവും സുഗമവുമാക്കുന്നു. ശാസ്ത്രബോധവും യുക്തിചിന്തയും വളർത്തിയെടുത്തുകൊണ്ട് പ്രപഞ്ചസത്യങ്ങളെ തേടിയുള്ള ഈ മഹായാത്രയിൽ പങ്കാളികളാകാൻ പുതുതലമുറയിലെ ഓരോ വിദ്യാർത്ഥിക്കും സാധിക്കേണ്ടതുണ്ട്."
+  },
+  {
+    "id": "lvl5-district-e",
+    "title": "5.2 നിർമ്മിത ബുദ്ധിയും ഭാവി സാങ്കേതികവിദ്യയും (District/State Passage E)",
+    "category": "Level 5 — District & State Championship Passages (ജില്ലാ-സംസ്ഥാന മത്സര ഖണ്ഡികകൾ — 1,800–2,200+ Chars)",
+    "tier": "District / State",
+    "recommendedMinutes": 15,
+    "text": "ഇരുപത്തിയൊന്നാം നൂറ്റാണ്ടിലെ മനുഷ്യജീവിതത്തെയും വ്യവസായ-വിദ്യാഭ്യാസ മേഖലകളെയും അടിമുടി മാറ്റിമറിച്ചുകൊണ്ടിരിക്കുന്ന ഏറ്റവും പ്രധാനപ്പെട്ട സാങ്കേതികവിദ്യയാണ് നിർമ്മിത ബുദ്ധി അഥവാ ആർട്ടിഫിഷ്യൽ ഇന്റലിജൻസ് (Artificial Intelligence - AI). മനുഷ്യന്റെ ചിന്താശേഷി, പഠനരീതി, പ്രശ്നപരിഹാര പാടവം, തീരുമാനമെടുക്കാനുള്ള കഴിവ് എന്നിവ കമ്പ്യൂട്ടർ അൽഗോരിതങ്ങളിലൂടെയും കൃത്രിമ ന്യൂറൽ നെറ്റ്‌വർക്കുകളിലൂടെയും (Neural Networks) പുനഃസൃഷ്ടിക്കുന്ന ശാസ്ത്രശാഖയാണിത്. മെഷീൻ ലേണിംഗ് (Machine Learning), ഡീപ്പ് ലേണിംഗ് (Deep Learning), നാച്ചുറൽ ലാംഗ്വേജ് പ്രോസസ്സിംഗ് (NLP), കമ്പ്യൂട്ടർ വിഷൻ എന്നിവയുടെ സംയോജനത്തിലൂടെ വലിയ അളവിലുള്ള വിവരങ്ങളെ (Big Data) നിമിഷങ്ങൾക്കുള്ളിൽ വിശകലനം ചെയ്യാൻ ആധുനിക കമ്പ്യൂട്ടറുകൾക്ക് സാധിക്കുന്നു. ആരോഗ്യരംഗത്ത് രോഗനിർണ്ണയം വേഗത്തിലാക്കാനും, എക്സ്-റേ, എം.ആർ.ഐ. സ്കാനുകൾ സൂക്ഷ്മമായി പരിശോധിച്ച് ക്യാൻസർ പോലുള്ള രോഗങ്ങൾ പ്രാരംഭഘട്ടത്തിൽത്തന്നെ കണ്ടെത്താനും പുതിയ മരുന്നുകൾ വികസിപ്പിക്കാനും നിർമ്മിത ബുദ്ധി ഡോക്ടർമാരെ സഹായിക്കുന്നു. കാർഷിക മേഖലയിൽ മണ്ണിന്റെ ഘടനയും കാലാവസ്ഥാ വ്യതിയാനങ്ങളും പരിശോധിച്ച് കൃത്യമായ അളവിൽ ജലവും വളവും നൽകുന്ന സ്മാർട്ട് ഫാമിംഗ് രീതികളും, റോബോട്ടുകളുടെ സഹായത്തോടെയുള്ള വിളവെടുപ്പും ഉൽപ്പാദനക്ഷമത വർദ്ധിപ്പിക്കുന്നു. മലയാളം ഉൾപ്പെടെയുള്ള ഇന്ത്യൻ ഭാഷകളിൽ ശബ്ദം തിരിച്ചറിയാനും (Speech Recognition), അച്ചടിച്ച താളുകളിൽനിന്ന് അക്ഷരങ്ങൾ വേർതിരിച്ചെടുക്കാനും (OCR), വിവിധ ഭാഷകൾ തമ്മിൽ തത്സമയം വിവർത്തനം നടത്താനും സ്വതന്ത്ര സോഫ്റ്റ്‌വെയർ കൂട്ടായ്മകൾ മികച്ച സംവിധാനങ്ങൾ വികസിപ്പിച്ചിട്ടുണ്ട്. എന്നിരുന്നാലും, നിർമ്മിത ബുദ്ധിയുടെ അനിയന്ത്രിതമായ വളർച്ച ചില ധാർമ്മികവും സാമൂഹികവുമായ വെല്ലുവിളികളും ഉയർത്തുന്നുണ്ട്. വ്യക്തിഗത വിവരങ്ങളുടെ സ്വകാര്യത (Data Privacy), ഡീപ്പ്ഫേക്ക് (Deepfake) വീഡിയോകളിലൂടെയുള്ള വ്യാജപ്രചാരണങ്ങൾ, തൊഴിൽമേഖലയിലുണ്ടാകുന്ന മാറ്റങ്ങൾ എന്നിവ ഗൗരവമായ ചർച്ചകൾക്ക് വിധേയമാകണം. യന്ത്രങ്ങൾ മനുഷ്യന് പകരക്കാരാകുന്നതിന് പകരം മനുഷ്യന്റെ സർഗ്ഗാത്മകതയെയും കാര്യക്ഷമതയെയും വർദ്ധിപ്പിക്കുന്ന സഹായികളായി മാറുമ്പോഴാണ് സാങ്കേതികവിദ്യ സാർത്ഥകമാകുന്നത്. സുതാര്യതയുള്ള സ്വതന്ത്ര സോഫ്റ്റ്‌വെയർ മാതൃകകളിലൂടെയും കൃത്യമായ സൈബർ നിയമങ്ങളിലൂടെയും നിർമ്മിത ബുദ്ധിയെ മാനവരാശിയുടെ പൊതുനന്മയ്ക്കായി ഉപയോഗിക്കാൻ നമുക്ക് കഴിയണം. കോഡിംഗും റോബോട്ടിക്സും മാതൃഭാഷാ കമ്പ്യൂട്ടിംഗും ഒരേപോലെ വശത്താക്കുന്ന നമ്മുടെ വിദ്യാർത്ഥികൾക്ക് ഭാവിയിലെ ഡിജിറ്റൽ ലോകത്തെ ആത്മവിശ്വാസത്തോടെ നയിക്കാൻ സാധിക്കുമെന്നതിൽ സംശയമില്ല."
+  },
+  {
+    "id": "lvl6-custom-starter",
+    "title": "6.1 എന്റെ പരിശീലന ഖണ്ഡിക — മാതൃക (Custom & ZWNJ Practice Starter)",
+    "category": "Level 6 — User Custom & Mistake-Targeted Passages (എന്റെ സ്വന്തം ഖണ്ഡികകൾ)",
+    "tier": "Custom",
+    "recommendedMinutes": 5,
+    "text": "ലിറ്റിൽ കൈറ്റ്സ് ഐ.ടി. മേളയിലെ മലയാളം ടൈപ്പിംഗ് മത്സരത്തിനായി തയ്യാറെടുക്കുന്ന വിദ്യാർത്ഥികൾക്കുള്ള പ്രത്യേക പരിശീലന ഖണ്ഡികയാണിത്. സോഫ്റ്റ്‌വെയർ, ഹാർഡ്‌വെയർ, ഓൺലൈൻ, ഇ-മെയിൽ തുടങ്ങിയ വാക്കുകളിലെ ചന്ദ്രക്കലയ്ക്ക് ശേഷം കൂട്ടക്ഷരം വരാതിരിക്കാൻ ZWNJ (AltGr + /) ഉപയോഗിക്കുന്നു. മുകളിലെ 'ഖണ്ഡിക തിരുത്തുക' (Edit This Text) എന്ന ബട്ടൺ അമർത്തി നിങ്ങൾക്ക് ഈ ഖണ്ഡികയിൽ മാറ്റങ്ങൾ വരുത്തുകയോ പുതിയ മലയാളം ലേഖനങ്ങൾ ചേർത്ത് പരിശീലിക്കുകയോ ചെയ്യാവുന്നതാണ്."
+  }
+];
+
+    // =========================================================================
+    // 2. MALAYALAM UNICODE NAMES & ATOMIC CHILLU DEFINITIONS (U+0D00 - U+0D7F)
+    // =========================================================================
+    const ATOMIC_CHILLUS = {
+      '\u0D7A': { name: 'ആണവചില്ല് ൺ (Chillu NN)', hex: 'U+0D7A', base: '\u0D23', baseName: 'ണ (U+0D23)' },
+      '\u0D7B': { name: 'ആണവചില്ല് ൻ (Chillu N)',  hex: 'U+0D7B', base: '\u0D28', baseName: 'ന (U+0D28)' },
+      '\u0D7C': { name: 'ആണവചില്ല് ർ (Chillu RR)', hex: 'U+0D7C', base: '\u0D30', baseName: 'ര (U+0D30)' },
+      '\u0D7D': { name: 'ആണവചില്ല് ൽ (Chillu L)',  hex: 'U+0D7D', base: '\u0D32', baseName: 'ല (U+0D32)' },
+      '\u0D7E': { name: 'ആണവചില്ല് ൾ (Chillu LL)', hex: 'U+0D7E', base: '\u0D33', baseName: 'ള (U+0D33)' },
+      '\u0D7F': { name: 'ആണവചില്ല് ൿ (Chillu K)',  hex: 'U+0D7F', base: '\u0D15', baseName: 'ക (U+0D15)' }
+    };
+
+    const BASE_TO_ATOMIC_CHILLU = {
+      '\u0D23': '\u0D7A',
+      '\u0D28': '\u0D7B',
+      '\u0D30': '\u0D7C',
+      '\u0D32': '\u0D7D',
+      '\u0D33': '\u0D7E',
+      '\u0D15': '\u0D7F'
+    };
+
+    const TWO_PART_VOWEL_TRAPS = {
+      '\u0D4A': { expectedGlyph: 'ൊ', expectedHex: 'U+0D4A', keyHint: 'Backtick (`)', trapStart: '\u0D46', trapName: 'െ (U+0D46)' },
+      '\u0D4B': { expectedGlyph: 'ോ', expectedHex: 'U+0D4B', keyHint: 'Key A (a)',     trapStart: '\u0D47', trapName: 'േ (U+0D47)' },
+      '\u0D48': { expectedGlyph: 'ൈ', expectedHex: 'U+0D48', keyHint: 'Key W (w)',     trapStart: '\u0D46', trapName: 'െ (U+0D46)' }
+    };
+
+    const UNICODE_CHAR_NAMES = {
+      '\u0D02': 'അനുസ്വാരം ം',
+      '\u0D03': 'വിസർഗ്ഗം ഃ',
+      '\u0D05': 'അ', '\u0D06': 'ആ', '\u0D07': 'ഇ', '\u0D08': 'ഈ',
+      '\u0D09': 'ഉ', '\u0D0A': 'ഊ', '\u0D0B': 'ഋ', '\u0D0E': 'എ',
+      '\u0D0F': 'ഏ', '\u0D10': 'ഐ', '\u0D12': 'ഒ', '\u0D13': 'ഓ', '\u0D14': 'ഔ',
+      '\u0D15': 'ക', '\u0D16': 'ഖ', '\u0D17': 'ഗ', '\u0D18': 'ഘ', '\u0D19': 'ങ',
+      '\u0D1A': 'ച', '\u0D1B': 'ഛ', '\u0D1C': 'ജ', '\u0D1D': 'ഝ', '\u0D1E': 'ഞ',
+      '\u0D1F': 'ട', '\u0D20': 'ഠ', '\u0D21': 'ഡ', '\u0D22': 'ഢ', '\u0D23': 'ണ',
+      '\u0D24': 'ത', '\u0D25': 'ഥ', '\u0D26': 'ദ', '\u0D27': 'ധ', '\u0D28': 'ന',
+      '\u0D2A': 'പ', '\u0D2B': 'ഫ', '\u0D2C': 'ബ', '\u0D2D': 'ഭ', '\u0D2E': 'മ',
+      '\u0D2F': 'യ', '\u0D30': 'ര', '\u0D31': 'റ', '\u0D32': 'ല', '\u0D33': 'ള',
+      '\u0D34': 'ഴ', '\u0D35': 'വ', '\u0D36': 'ശ', '\u0D37': 'ഷ', '\u0D38': 'സ', '\u0D39': 'ഹ',
+      '\u0D3E': 'ാ (ദീർഘം)', '\u0D3F': 'ി (വള്ളി)', '\u0D40': 'ീ',
+      '\u0D41': 'ു', '\u0D42': 'ൂ', '\u0D43': 'ൃ',
+      '\u0D46': 'െ', '\u0D47': 'േ', '\u0D48': 'ൈ',
+      '\u0D4A': 'ൊ', '\u0D4B': 'ോ', '\u0D57': 'ൗ',
+      '\u0D4D': '് (ചന്ദ്രക്കല / Virama)',
+      '\u0D7A': 'ആണവചില്ല് ൺ', '\u0D7B': 'ആണവചില്ല് ൻ', '\u0D7C': 'ആണവചില്ല് ർ',
+      '\u0D7D': 'ആണവചില്ല് ൽ', '\u0D7E': 'ആണവചില്ല് ൾ', '\u0D7F': 'ആണവചില്ല് ൿ',
+      '\u200C': 'ZWNJ (Zero Width Non-Joiner)',
+      '\u200D': 'ZWJ (Zero Width Joiner)',
+      ' ': 'Space (സ്പേസ്)'
+    };
+
+    // =========================================================================
+    // 3. COMPLETE PHYSICAL HARDWARE KEYMAP SPECIFICATION (ROW 1 - ROW 4)
+    // =========================================================================
+    const BASE_INSCRIPT_MAP = {
+      // Row 1: Number Row
+      'Backquote':    { label: '`', unshift: '\u0D4A', shift: '\u0D12', altgr: '\u0D60' },
+      'Digit1':       { label: '1', unshift: '1',      shift: '!',      altgr: '\u0D67' },
+      'Digit2':       { label: '2', unshift: '2',      shift: '@',      altgr: '\u0D68' },
+      'Digit3':       { label: '3', unshift: '3',      shift: '\u0D4D\u0D30', altgr: '\u0D69' },
+      'Digit4':       { label: '4', unshift: '4',      shift: '\u0D7C', altgr: '\u0D6A' },
+      'Digit5':       { label: '5', unshift: '5',      shift: '\u0D1C\u0D4D\u0D1E', altgr: '\u0D6B' },
+      'Digit6':       { label: '6', unshift: '6',      shift: '\u0D24\u0D4D\u0D30', altgr: '\u0D6C' },
+      'Digit7':       { label: '7', unshift: '7',      shift: '\u0D15\u0D4D\u0D37', altgr: '\u0D6D' },
+      'Digit8':       { label: '8', unshift: '8',      shift: '\u0D7E', altgr: '\u0D6E' },
+      'Digit9':       { label: '9', unshift: '(',      shift: '(',      altgr: '\u0D6F' },
+      'Digit0':       { label: '0', unshift: ')',      shift: ')',      altgr: '\u0D66' },
+      'Minus':        { label: '-', unshift: '-',      shift: '\u0D03', altgr: '-' },
+      'Equal':        { label: '=', unshift: '\u0D43', shift: '\u0D0B', altgr: '\u0D44' },
+
+      // Row 2: Top QWERTY Row
+      'KeyQ':         { label: 'Q', unshift: '\u0D57', shift: '\u0D14', altgr: '\u0D4C' },
+      'KeyW':         { label: 'W', unshift: '\u0D48', shift: '\u0D10', altgr: '' },
+      'KeyE':         { label: 'E', unshift: '\u0D3E', shift: '\u0D06', altgr: '' },
+      'KeyR':         { label: 'R', unshift: '\u0D40', shift: '\u0D08', altgr: '' },
+      'KeyT':         { label: 'T', unshift: '\u0D42', shift: '\u0D0A', altgr: '' },
+      'KeyY':         { label: 'Y', unshift: '\u0D2C', shift: '\u0D2D', altgr: '' },
+      'KeyU':         { label: 'U', unshift: '\u0D39', shift: '\u0D19', altgr: '' },
+      'KeyI':         { label: 'I', unshift: '\u0D17', shift: '\u0D18', altgr: '' },
+      'KeyO':         { label: 'O', unshift: '\u0D26', shift: '\u0D27', altgr: '' },
+      'KeyP':         { label: 'P', unshift: '\u0D1C', shift: '\u0D1D', altgr: '' },
+      'BracketLeft':  { label: '[', unshift: '\u0D21', shift: '\u0D22', altgr: '' },
+      'BracketRight': { label: ']', unshift: '\u0D7C', shift: '\u0D1E', altgr: '\u200D' },
+      'Backslash':    { label: '\\', unshift: '\u0D7D', shift: '\u0D7F', altgr: '\u200C' },
+
+      // Row 3: Home Row
+      'KeyA':         { label: 'A', unshift: '\u0D4B', shift: '\u0D13', altgr: '' },
+      'KeyS':         { label: 'S', unshift: '\u0D47', shift: '\u0D0F', altgr: '' },
+      'KeyD':         { label: 'D', unshift: '\u0D4D', shift: '\u0D05', altgr: '' },
+      'KeyF':         { label: 'F', unshift: '\u0D3F', shift: '\u0D07', altgr: '' },
+      'KeyG':         { label: 'G', unshift: '\u0D41', shift: '\u0D09', altgr: '' },
+      'KeyH':         { label: 'H', unshift: '\u0D2A', shift: '\u0D2B', altgr: '' },
+      'KeyJ':         { label: 'J', unshift: '\u0D30', shift: '\u0D31', altgr: '\u0D7C' },
+      'KeyK':         { label: 'K', unshift: '\u0D15', shift: '\u0D16', altgr: '\u0D7F' },
+      'KeyL':         { label: 'L', unshift: '\u0D24', shift: '\u0D25', altgr: '' },
+      'Semicolon':    { label: ';', unshift: '\u0D1A', shift: '\u0D1B', altgr: '' },
+      'Quote':        { label: "'", unshift: '\u0D1F', shift: '\u0D20', altgr: '"' },
+
+      // Row 4: Bottom Row
+      'KeyZ':         { label: 'Z', unshift: '\u0D46', shift: '\u0D0E', altgr: '' },
+      'KeyX':         { label: 'X', unshift: '\u0D02', shift: '\u0D7A', altgr: '\u200C' },
+      'KeyC':         { label: 'C', unshift: '\u0D2E', shift: '\u0D23', altgr: '\u0D7A' },
+      'KeyV':         { label: 'V', unshift: '\u0D28', shift: '\u0D7B', altgr: '\u0D7B' },
+      'KeyB':         { label: 'B', unshift: '\u0D35', shift: '\u0D34', altgr: '' },
+      'KeyN':         { label: 'N', unshift: '\u0D32', shift: '\u0D33', altgr: '\u0D7D', altgrShift: '\u0D7E' },
+      'KeyM':         { label: 'M', unshift: '\u0D38', shift: '\u0D36', altgr: '' },
+      'Comma':        { label: ',', unshift: ',',      shift: '\u0D37', altgr: '' },
+      'Period':       { label: '.', unshift: '.',      shift: '\u0D7D', altgr: '.' },
+      'Slash':        { label: '/', unshift: '\u0D2F', shift: '?',      altgr: '\u200C' },
+      'Space':        { label: 'Space', unshift: ' ',  shift: ' ',      altgr: ' ' }
+    };
+
+    const DEFAULT_CUSTOM_CHILLU_MAP = {
+      '\u0D7A': { code: 'KeyX',         shift: true,  altgr: false, display: 'Shift + X' },
+      '\u0D7B': { code: 'KeyV',         shift: true,  altgr: false, display: 'Shift + V' },
+      '\u0D7C': { code: 'BracketRight', shift: false, altgr: false, display: ']' },
+      '\u0D7D': { code: 'Backslash',    shift: false, altgr: false, display: '\\ (or Shift + .)' },
+      '\u0D7E': { code: 'Digit8',       shift: true,  altgr: false, display: 'Shift + 8' },
+      '\u0D7F': { code: 'Backslash',    shift: true,  altgr: false, display: 'Shift + \\' }
+    };
+
+    // =========================================================================
+    // 4. SAFE LOCALSTORAGE WRAPPER & STATE MANAGEMENT
+    // =========================================================================
+    function loadStorage(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch (e) {
+        return fallback;
+      }
+    }
+
+    function saveStorage(key, val) {
+      try {
+        localStorage.setItem(key, JSON.stringify(val));
+      } catch (e) {
+        // Ignore storage quota errors in sandboxed frames
+      }
+    }
+
+    const appState = {
+      passages: [],
+      currentPassageId: 'lvl4-subdistrict-a',
+      candidateName: 'Practice Candidate',
+      registerNumber: 'LK2026-9042',
+      sessionMode: 'dojo', // 'dojo' or 'exam'
+      examUnlocked: true,
+      inputEngine: 'hardware', // 'hardware' or 'native'
+      chilluProfile: 'kite', // 'kite', 'bis', 'custom'
+      customChilluBindings: loadStorage('sarika_custom_chillus', JSON.parse(JSON.stringify(DEFAULT_CUSTOM_CHILLU_MAP))),
+      enforcementMode: 'strict', // 'strict' or 'freeflow'
+      autoConvertZwjChillu: true,
+      autoScrollRef: false,
+      showHints: true,
+      audioEnabled: true,
+      timerDurationSec: 900, // 15 min default
+
+      // Active Session Runtime
+      graphemes: [], // Array of { clusterStr, codepoints: [...], startCpIndex, spanEl, hadError }
+      flatCodepoints: [], // Array of { char, graphemeIdx, subIdx }
+      currentCpIndex: 0,
+      typedChars: [], // Array of { char, correct }
+      pendingChilluSeq: '', // Tracks Consonant + Virama for optional ] -> Atomic Chillu conversion
+
+      // Telemetry Counters
+      sessionActive: false,
+      sessionFinished: false,
+      startTimeMs: 0,
+      elapsedMs: 0,
+      lastKeystrokeMs: 0,
+      lastLatencyMs: 0,
+      correctStrokes: 0,
+      wrongStrokes: 0,
+      interKeyLatencies: [],
+      charTelemetry: {}, // char -> { count, totalLatencyMs, errorCount }
+      sparklineHistory: [], // last 60s CPM samples
+      timerIntervalId: null,
+      sparklineIntervalId: null,
+      listeningForChilluBind: null
+    };
+
+    // =========================================================================
+    // 5. ZERO-ASSET WEB AUDIO API MECHANICAL KEY SOUND SYNTHESIZER
+    // =========================================================================
+    let audioCtx = null;
+
+    function getAudioCtx() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) {
+          audioCtx = new AudioContextClass();
+        }
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playKeySound(type) {
+      if (!appState.audioEnabled) return;
+      const ctx = getAudioCtx();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+
+      if (type === 'ok') {
+        // Tactile mechanical switch thock
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(175, now);
+        osc.frequency.exponentialRampToValueAtTime(55, now + 0.035);
+        gain.gain.setValueAtTime(0.14, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.038);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.04);
+      } else if (type === 'cluster-done') {
+        // Subtle harmonic chime on completing a multi-stroke conjunct or atomic chillu
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(520, now);
+        osc.frequency.exponentialRampToValueAtTime(680, now + 0.055);
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.065);
+      } else if (type === 'error') {
+        // Low-frequency woody error thud
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(115, now);
+        osc.frequency.linearRampToValueAtTime(72, now + 0.11);
+        gain.gain.setValueAtTime(0.18, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.125);
+      } else if (type === 'fanfare') {
+        // Completion fanfare chord
+        const freqs = [440, 554.37, 659.25, 880];
+        freqs.forEach((f, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(f, now + idx * 0.07);
+          gain.gain.setValueAtTime(0.12, now + idx * 0.07);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.45);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.07);
+          osc.stop(now + idx * 0.07 + 0.46);
+        });
+      }
+    }
+
+    // =========================================================================
+    // 6. MALAYALAM GRAPHEME SEGMENTATION & UNICODE SANITIZER
+    // =========================================================================
+    function segmentMalayalamGraphemes(text) {
+      if (typeof Intl !== 'undefined' && Intl.Segmenter) {
+        const seg = new Intl.Segmenter('ml', { granularity: 'grapheme' });
+        return Array.from(seg.segment(text), s => s.segment);
+      }
+      // Fallback regex grouping Malayalam base + combining marks / virama + consonant / ZWNJ / ZWJ
+      const clusters = [];
+      const cps = Array.from(text);
+      let i = 0;
+      while (i < cps.length) {
+        let cluster = cps[i];
+        i++;
+        while (i < cps.length) {
+          const cp = cps[i].codePointAt(0);
+          const prevCp = cluster.codePointAt(cluster.length - 1);
+          const isCombining = (cp >= 0x0D00 && cp <= 0x0D03) || (cp >= 0x0D3B && cp <= 0x0D4D) || cp === 0x0D57 || cp === 0x0D62 || cp === 0x0D63 || cp === 0x200C || cp === 0x200D;
+          const afterVirama = prevCp === 0x0D4D && (cp >= 0x0D15 && cp <= 0x0D39);
+          if (isCombining || afterVirama) {
+            cluster += cps[i];
+            i++;
+          } else {
+            break;
+          }
+        }
+        clusters.push(cluster);
+      }
+      return clusters;
+    }
+
+    function sanitizeToSarikaStandard(rawText) {
+      let text = rawText.normalize('NFC');
+      let zwjConvertedCount = 0;
+
+      const zwjRules = [
+        { pattern: /\u0D23\u0D4D\u200D/g, atomic: '\u0D7A' }, // ൺ
+        { pattern: /\u0D28\u0D4D\u200D/g, atomic: '\u0D7B' }, // ൻ
+        { pattern: /\u0D30\u0D4D\u200D/g, atomic: '\u0D7C' }, // ർ
+        { pattern: /\u0D32\u0D4D\u200D/g, atomic: '\u0D7D' }, // ൽ
+        { pattern: /\u0D33\u0D4D\u200D/g, atomic: '\u0D7E' }, // ൾ
+        { pattern: /\u0D15\u0D4D\u200D/g, atomic: '\u0D7F' }  // ൿ
+      ];
+
+      zwjRules.forEach(rule => {
+        const matches = text.match(rule.pattern);
+        if (matches) {
+          zwjConvertedCount += matches.length;
+          text = text.replace(rule.pattern, rule.atomic);
+        }
+      });
+
+      // Archaic au length mark U+0D4C -> U+0D57
+      text = text.replace(/\u0D4C/g, '\u0D57');
+      // Smart quotes and dashes to standard keyboard punctuation
+      text = text.replace(/[“”]/g, '"').replace(/[‘’]/g, "'").replace(/[—–]/g, '-');
+      // Collapse multiple horizontal spaces and normalize line breaks
+      text = text.replace(/[ \t]+/g, ' ').replace(/\n{2,}/g, ' ').trim();
+
+      return { text, zwjConvertedCount };
+    }
+
+    function inspectPassageText(text) {
+      const codepoints = Array.from(text);
+      const graphemes = segmentMalayalamGraphemes(text);
+      const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+      let atomicChillus = 0;
+      codepoints.forEach(ch => {
+        const cp = ch.codePointAt(0);
+        if (cp >= 0x0D7A && cp <= 0x0D7F) atomicChillus++;
+      });
+      const legacyMatches = text.match(/[\u0D23\u0D28\u0D30\u0D32\u0D33\u0D15]\u0D4D\u200D/g);
+      const legacyZwjCount = legacyMatches ? legacyMatches.length : 0;
+      return {
+        codepointCount: codepoints.length,
+        graphemeCount: graphemes.length,
+        wordCount: words,
+        atomicChillus,
+        legacyZwjCount
+      };
+    }
+
+    // =========================================================================
+    // 7. HARDWARE KEYCODE TRANSLATION & SHORTCUT HINT LOOKUP
+    // =========================================================================
+    function getKeyHintForCodepoint(targetChar) {
+      // Check Atomic Chillus based on active profile
+      if (ATOMIC_CHILLUS[targetChar]) {
+        if (appState.chilluProfile === 'bis') {
+          const bisHints = {
+            '\u0D7A': 'AltGr + C',
+            '\u0D7B': 'AltGr + V',
+            '\u0D7C': 'AltGr + J',
+            '\u0D7D': 'AltGr + N',
+            '\u0D7E': 'AltGr + Shift + N',
+            '\u0D7F': 'AltGr + K'
+          };
+          return bisHints[targetChar];
+        } else if (appState.chilluProfile === 'custom') {
+          const customBind = appState.customChilluBindings[targetChar];
+          if (customBind && customBind.display) return customBind.display;
+        } else {
+          // Profile 1: KITE Direct Atomic Shortcut Layout
+          const kiteHints = {
+            '\u0D7A': 'Shift + X (or AltGr+C)',
+            '\u0D7B': 'Shift + V (or AltGr+V)',
+            '\u0D7C': '] (or Shift+4 / AltGr+J)',
+            '\u0D7D': '\\ or Shift + . (or AltGr+N)',
+            '\u0D7E': 'Shift + 8 (or AltGr+Shift+N)',
+            '\u0D7F': 'Shift + \\ (or AltGr+K)'
+          };
+          return kiteHints[targetChar];
+        }
+      }
+
+      if (targetChar === '\u200C') return 'AltGr + / (ZWNJ)';
+      if (targetChar === '\u200D') return 'AltGr + ] (ZWJ)';
+
+      for (const [code, entry] of Object.entries(BASE_INSCRIPT_MAP)) {
+        if (entry.unshift === targetChar) return `Key: ${entry.label}`;
+        if (entry.shift === targetChar) return `Shift + ${entry.label}`;
+        if (entry.altgr === targetChar) return `AltGr + ${entry.label}`;
+        if (entry.altgrShift === targetChar) return `AltGr + Shift + ${entry.label}`;
+      }
+      return `Key: "${targetChar}"`;
+    }
+
+    function translateHardwareKeyEvent(e) {
+      const code = e.code;
+      const shift = e.shiftKey;
+      const altgr = e.getModifierState && (e.getModifierState('AltGraph') || (e.altKey && e.ctrlKey) || e.code === 'AltRight');
+
+      // 1. Check Custom Profile 3 bindings first if active
+      if (appState.chilluProfile === 'custom') {
+        for (const [chilluChar, bind] of Object.entries(appState.customChilluBindings)) {
+          if (bind.code === code && !!bind.shift === !!shift && !!bind.altgr === !!altgr) {
+            return chilluChar;
+          }
+        }
+      }
+
+      // 2. Check Profile 2 (BIS Enhanced AltGr Layer) overrides
+      if (appState.chilluProfile === 'bis') {
+        if (code === 'BracketRight' && !shift && !altgr) return '\u200D'; // ZWJ on ] in pure BIS
+        if (code === 'Period' && shift && !altgr) return '.';
+        if (code === 'Digit8' && shift && !altgr) return '\u0D36\u0D4D\u0D30'; // ശ്ര
+      }
+
+      const mapEntry = BASE_INSCRIPT_MAP[code];
+      if (!mapEntry) return null;
+
+      if (altgr && shift && mapEntry.altgrShift) {
+        return mapEntry.altgrShift;
+      }
+      if (altgr && mapEntry.altgr) {
+        return mapEntry.altgr;
+      }
+      if (shift && mapEntry.shift !== undefined && mapEntry.shift !== '') {
+        return mapEntry.shift;
+      }
+      if (!shift && mapEntry.unshift !== undefined) {
+        return mapEntry.unshift;
+      }
+      return null;
+    }
+
+    // =========================================================================
+    // 8. PASSAGE LIBRARY PERSISTENCE & INITIALIZATION
+    // =========================================================================
+    function initPassageLibrary() {
+      const customSaved = loadStorage('sarika_custom_passages', []);
+      const overrides = loadStorage('sarika_factory_overrides', {});
+
+      appState.passages = FACTORY_PASSAGES.map(fp => {
+        if (overrides[fp.id]) {
+          return Object.assign({}, fp, {
+            title: overrides[fp.id].title || fp.title,
+            text: overrides[fp.id].text || fp.text,
+            isModifiedFactory: true
+          });
+        }
+        return Object.assign({}, fp);
+      });
+
+      customSaved.forEach(cp => {
+        appState.passages.push(cp);
+      });
+
+      populatePassageDropdown();
+    }
+
+    function populatePassageDropdown() {
+      const sel = document.getElementById('passageSelect');
+      sel.innerHTML = '';
+
+      // Group by category
+      const groups = {};
+      appState.passages.forEach(p => {
+        if (!groups[p.category]) groups[p.category] = [];
+        groups[p.category].push(p);
+      });
+
+      Object.entries(groups).forEach(([catName, list]) => {
+        const optgroup = document.createElement('optgroup');
+        optgroup.label = catName;
+        list.forEach(p => {
+          const opt = document.createElement('option');
+          opt.value = p.id;
+          const cpLen = Array.from(p.text).length;
+          opt.textContent = `${p.title} (${cpLen} chars)`;
+          if (p.id === appState.currentPassageId) opt.selected = true;
+          optgroup.appendChild(opt);
+        });
+        sel.appendChild(optgroup);
+      });
+    }
+
+    function getCurrentPassageObj() {
+      return appState.passages.find(p => p.id === appState.currentPassageId) || appState.passages[0];
+    }
+
+    // =========================================================================
+    // 9. DOM GRAPH-CLUSTER CACHING & ARENA RENDERING (LOCKED 60+ FPS)
+    // =========================================================================
+    function loadPassageIntoArena(passageId) {
+      if (passageId) appState.currentPassageId = passageId;
+      const passage = getCurrentPassageObj();
+      appState.currentPassageId = passage.id;
+
+      const selectEl = document.getElementById('passageSelect');
+      if (selectEl.value !== passage.id) selectEl.value = passage.id;
+
+      // Reset session state
+      stopSessionTimers();
+      appState.sessionActive = false;
+      appState.sessionFinished = false;
+      appState.startTimeMs = 0;
+      appState.elapsedMs = 0;
+      appState.lastKeystrokeMs = 0;
+      appState.lastLatencyMs = 0;
+      appState.correctStrokes = 0;
+      appState.wrongStrokes = 0;
+      appState.currentCpIndex = 0;
+      appState.typedChars = [];
+      appState.pendingChilluSeq = '';
+      appState.interKeyLatencies = [];
+      appState.charTelemetry = {};
+      appState.sparklineHistory = [];
+
+      // Segment into grapheme clusters and build flat codepoint index
+      const clusters = segmentMalayalamGraphemes(passage.text);
+      appState.graphemes = [];
+      appState.flatCodepoints = [];
+
+      const refContainer = document.getElementById('referenceViewport');
+      refContainer.innerHTML = '';
+      const frag = document.createDocumentFragment();
+
+      let cpCounter = 0;
+      let chilluCount = 0;
+
+      clusters.forEach((clusterStr, gIdx) => {
+        const cps = Array.from(clusterStr);
+        const span = document.createElement('span');
+        span.className = 'g-span';
+        span.textContent = clusterStr;
+        frag.appendChild(span);
+
+        appState.graphemes.push({
+          clusterStr,
+          codepoints: cps,
+          startCpIndex: cpCounter,
+          spanEl: span,
+          hadError: false
+        });
+
+        cps.forEach((ch, sIdx) => {
+          const code = ch.codePointAt(0);
+          if (code >= 0x0D7A && code <= 0x0D7F) chilluCount++;
+          appState.flatCodepoints.push({
+            char: ch,
+            graphemeIdx: gIdx,
+            subIdx: sIdx
+          });
+          cpCounter++;
+        });
+      });
+
+      refContainer.appendChild(frag);
+      refContainer.scrollTop = 0;
+
+      // Update Header Metadata
+      document.getElementById('refPassageTitle').textContent = passage.title;
+      document.getElementById('refCharCountBadge').textContent = `${appState.flatCodepoints.length.toLocaleString()} codepoints`;
+      document.getElementById('refChilluCountBadge').textContent = `Atomic Chillus: ${chilluCount}`;
+
+      // Clear Bottom Active Typing Box
+      document.getElementById('typedContentSpan').innerHTML = '';
+      hideDiagnosticToast();
+
+      // Highlight initial grapheme & decomposition HUD
+      if (appState.graphemes.length > 0) {
+        appState.graphemes[0].spanEl.classList.add('g-active');
+      }
+      updateDecompositionHud();
+      updateTelemetryDashboard();
+      drawSparkline();
+    }
+
+    // =========================================================================
+    // 10. LIVE CONJUNCT DECOMPOSITION HUD & DIAGNOSTIC ENGINE
+    // =========================================================================
+    function updateDecompositionHud() {
+      const targetGlyphEl = document.getElementById('hudTargetGrapheme');
+      const stepsContainer = document.getElementById('hudDecompSteps');
+      stepsContainer.innerHTML = '';
+
+      if (appState.currentCpIndex >= appState.flatCodepoints.length) {
+        targetGlyphEl.textContent = '✓';
+        return;
+      }
+
+      const currentSlot = appState.flatCodepoints[appState.currentCpIndex];
+      const gObj = appState.graphemes[currentSlot.graphemeIdx];
+
+      targetGlyphEl.textContent = gObj.clusterStr === ' ' ? '␣' : gObj.clusterStr;
+
+      gObj.codepoints.forEach((cpChar, idx) => {
+        if (idx > 0) {
+          const arrow = document.createElement('span');
+          arrow.className = 'step-arrow';
+          arrow.textContent = '➔';
+          stepsContainer.appendChild(arrow);
+        }
+
+        const pill = document.createElement('div');
+        pill.className = 'cp-step-pill';
+        if (idx < currentSlot.subIdx) {
+          pill.classList.add('step-done');
+        } else if (idx === currentSlot.subIdx) {
+          pill.classList.add('step-active');
+        }
+
+        const cpHex = 'U+' + cpChar.codePointAt(0).toString(16).toUpperCase().padStart(4, '0');
+        const charName = UNICODE_CHAR_NAMES[cpChar] || (cpChar === ' ' ? 'Space' : cpChar);
+        const keyHint = getKeyHintForCodepoint(cpChar);
+
+        let displayGlyph = cpChar;
+        if (cpChar === ' ') displayGlyph = '␣ (Space)';
+        else if (cpChar === '\u200C') displayGlyph = '[ZWNJ]';
+        else if (cpChar === '\u200D') displayGlyph = '[ZWJ]';
+
+        pill.innerHTML = `
+          <span>${idx < currentSlot.subIdx ? '✓' : (idx + 1) + '.'}</span>
+          <span class="cp-glyph">${displayGlyph}</span>
+          <span class="cp-key-badge">${keyHint}</span>
+          <span class="cp-hex">${charName} (${cpHex})</span>
+        `;
+        stepsContainer.appendChild(pill);
+      });
+    }
+
+    function showDiagnosticToast(msg) {
+      const toast = document.getElementById('diagnosticToast');
+      toast.textContent = msg;
+      toast.classList.add('visible');
+    }
+
+    function hideDiagnosticToast() {
+      const toast = document.getElementById('diagnosticToast');
+      toast.classList.remove('visible');
+    }
+
+    function analyzeMistakeAndNotify(expectedChar, typedChar) {
+      // 1. Atomic Chillu Encoding Trap Detector
+      if (ATOMIC_CHILLUS[expectedChar]) {
+        const chilluMeta = ATOMIC_CHILLUS[expectedChar];
+        const shortcut = getKeyHintForCodepoint(expectedChar);
+        if (typedChar === chilluMeta.base) {
+          showDiagnosticToast(
+            `⚠️ ആണവചില്ല് ആവശ്യമാണ് (Atomic Chillu Required)! You typed base letter '${typedChar}' (${chilluMeta.baseName}), but competition text requires Atomic '${expectedChar}' (${chilluMeta.hex}). Press [${shortcut}]!`
+          );
+          return;
+        }
+        showDiagnosticToast(
+          `⚠️ Expected Atomic Chillu '${expectedChar}' (${chilluMeta.hex}). Press [${shortcut}] on your keyboard.`
+        );
+        return;
+      }
+
+      // 2. Two-Part Dependent Vowel Sign Trap Detector (ൊ, ോ, ൈ)
+      if (TWO_PART_VOWEL_TRAPS[expectedChar]) {
+        const vMeta = TWO_PART_VOWEL_TRAPS[expectedChar];
+        if (typedChar === vMeta.trapStart) {
+          showDiagnosticToast(
+            `⚠️ ഒറ്റ കീ ഉപയോഗിക്കുക! Do not compose '${vMeta.expectedGlyph}' (${vMeta.expectedHex}) using '${vMeta.trapName}'. Press direct single key [${vMeta.keyHint}]!`
+          );
+          return;
+        }
+      }
+
+      // 3. Forgotten Virama (്) in Conjunct
+      if (expectedChar === '\u0D4D') {
+        showDiagnosticToast(
+          `⚠️ ചന്ദ്രക്കല (് U+0D4D) ആവശ്യമാണ്! Press [Key: D] first to form the കൂട്ടക്ഷരം (Conjunct).`
+        );
+        return;
+      }
+
+      // 4. ZWNJ Required
+      if (expectedChar === '\u200C') {
+        showDiagnosticToast(
+          `⚠️ [ZWNJ] (U+200C) non-joiner required after ചന്ദ്രക്കല! Press [AltGr + /] or [Shift + X].`
+        );
+        return;
+      }
+
+      // 5. General Codepoint Mismatch
+      const expHex = 'U+' + expectedChar.codePointAt(0).toString(16).toUpperCase().padStart(4, '0');
+      const gotHex = typedChar ? 'U+' + typedChar.codePointAt(0).toString(16).toUpperCase().padStart(4, '0') : 'None';
+      const hint = getKeyHintForCodepoint(expectedChar);
+      const expDisplay = expectedChar === ' ' ? 'Space (സ്പേസ്)' : expectedChar;
+      showDiagnosticToast(
+        `❌ തെറ്റായ അക്ഷരം! Expected '${expDisplay}' (${expHex}) via [${hint}], but received '${typedChar}' (${gotHex}).`
+      );
+    }
+
+    // =========================================================================
+    // 11. CORE KEYSTROKE PROCESSING & SARIKA STRICT LOCK / FREE-FLOW ENGINE
+    // =========================================================================
+    function processCandidateInputString(inputStr) {
+      if (!inputStr || appState.sessionFinished) return;
+
+      // Check Exam Lock
+      if (appState.sessionMode === 'exam' && !appState.examUnlocked) {
+        openCandidateModal();
+        return;
+      }
+
+      // Start timer on first keystroke if not active
+      if (!appState.sessionActive) {
+        startSessionTimers();
+      }
+
+      const chars = Array.from(inputStr);
+      chars.forEach(ch => processSingleCodepoint(ch));
+    }
+
+    function processSingleCodepoint(typedChar) {
+      if (appState.sessionFinished || appState.currentCpIndex >= appState.flatCodepoints.length) return;
+
+      const now = performance.now();
+      const currentSlot = appState.flatCodepoints[appState.currentCpIndex];
+      const expectedChar = currentSlot.char;
+      const gObj = appState.graphemes[currentSlot.graphemeIdx];
+
+      // Optional KITE convenience: If user has Auto-Convert Consonant + ് + ] enabled
+      // and target is an Atomic Chillu (e.g. ൻ) and user presses base consonant, still warn in strict mode
+      // unless they directly press the atomic chillu key.
+
+      // Initialize per-character telemetry slot
+      if (!appState.charTelemetry[expectedChar]) {
+        appState.charTelemetry[expectedChar] = { count: 0, totalLatencyMs: 0, errorCount: 0 };
+      }
+
+      if (typedChar === expectedChar) {
+        // CORRECT CODEPOINT ENTERED
+        const deltaMs = appState.lastKeystrokeMs > 0 ? Math.min(5000, now - appState.lastKeystrokeMs) : 120;
+        appState.lastKeystrokeMs = now;
+        appState.lastLatencyMs = Math.round(deltaMs);
+        appState.interKeyLatencies.push(deltaMs);
+
+        appState.charTelemetry[expectedChar].count++;
+        appState.charTelemetry[expectedChar].totalLatencyMs += deltaMs;
+
+        appState.correctStrokes++;
+        appState.typedChars.push({ char: typedChar, correct: true });
+        hideDiagnosticToast();
+
+        // Remove error shake if previously locked
+        gObj.spanEl.classList.remove('g-locked-err');
+
+        const isClusterComplete = (currentSlot.subIdx === gObj.codepoints.length - 1);
+        appState.currentCpIndex++;
+
+        if (isClusterComplete) {
+          gObj.spanEl.classList.remove('g-active');
+          gObj.spanEl.classList.add(gObj.hadError ? 'g-done-err' : 'g-done');
+
+          if (gObj.codepoints.length > 1 || ATOMIC_CHILLUS[expectedChar]) {
+            playKeySound('cluster-done');
+          } else {
+            playKeySound('ok');
+          }
+
+          // Highlight next grapheme cluster & auto-scroll smoothly
+          if (appState.currentCpIndex < appState.flatCodepoints.length) {
+            const nextSlot = appState.flatCodepoints[appState.currentCpIndex];
+            const nextGrapheme = appState.graphemes[nextSlot.graphemeIdx];
+            nextGrapheme.spanEl.classList.add('g-active');
+            autoScrollReferenceViewport(nextGrapheme.spanEl);
+          }
+        } else {
+          playKeySound('ok');
+        }
+
+        renderTypedMirrorBox();
+        updateDecompositionHud();
+        updateTelemetryDashboard();
+
+        // Check if passage finished
+        if (appState.currentCpIndex >= appState.flatCodepoints.length) {
+          completeSession('Passage Completed!');
+        }
+      } else {
+        // WRONG KEYSTROKE COMMITTED
+        appState.wrongStrokes++;
+        appState.charTelemetry[expectedChar].errorCount++;
+        gObj.hadError = true;
+        playKeySound('error');
+        analyzeMistakeAndNotify(expectedChar, typedChar);
+
+        if (appState.enforcementMode === 'strict') {
+          // SARIKA STRICT LOCK: Do NOT advance cursor! Shake crimson active character.
+          gObj.spanEl.classList.remove('g-locked-err');
+          void gObj.spanEl.offsetWidth; // Reflow to re-trigger animation
+          gObj.spanEl.classList.add('g-locked-err');
+        } else {
+          // FREE-FLOW PRACTICE MODE: Advance cursor and highlight error in crimson
+          appState.typedChars.push({ char: typedChar, correct: false });
+          gObj.spanEl.classList.remove('g-active');
+          gObj.spanEl.classList.add('g-err-advance');
+
+          // Advance to start of next grapheme or next codepoint
+          appState.currentCpIndex++;
+          if (appState.currentCpIndex < appState.flatCodepoints.length) {
+            const nextSlot = appState.flatCodepoints[appState.currentCpIndex];
+            const nextGrapheme = appState.graphemes[nextSlot.graphemeIdx];
+            nextGrapheme.spanEl.classList.add('g-active');
+            autoScrollReferenceViewport(nextGrapheme.spanEl);
+          }
+          renderTypedMirrorBox();
+          updateDecompositionHud();
+        }
+
+        updateTelemetryDashboard();
+      }
+    }
+
+    function handleFreeFlowBackspace() {
+      if (appState.enforcementMode !== 'freeflow' || appState.currentCpIndex <= 0 || appState.sessionFinished) return;
+
+      // Remove active class from current grapheme
+      if (appState.currentCpIndex < appState.flatCodepoints.length) {
+        const curSlot = appState.flatCodepoints[appState.currentCpIndex];
+        appState.graphemes[curSlot.graphemeIdx].spanEl.classList.remove('g-active', 'g-locked-err');
+      }
+
+      appState.currentCpIndex--;
+      const popped = appState.typedChars.pop();
+      if (popped && popped.correct && appState.correctStrokes > 0) {
+        appState.correctStrokes--;
+      }
+
+      const prevSlot = appState.flatCodepoints[appState.currentCpIndex];
+      const prevGrapheme = appState.graphemes[prevSlot.graphemeIdx];
+      prevGrapheme.spanEl.classList.remove('g-done', 'g-done-err', 'g-err-advance');
+      prevGrapheme.spanEl.classList.add('g-active');
+
+      renderTypedMirrorBox();
+      updateDecompositionHud();
+      updateTelemetryDashboard();
+    }
+
+    function renderTypedMirrorBox() {
+      const span = document.getElementById('typedContentSpan');
+      const box = document.getElementById('typingMirrorArea');
+
+      if (appState.enforcementMode === 'strict') {
+        // Fast textContent update in strict mode since all accepted chars are valid
+        const fullStr = appState.typedChars.map(c => c.char).join('');
+        span.textContent = fullStr;
+      } else {
+        // Free-flow mode: render crimson spans for wrong characters
+        const htmlParts = appState.typedChars.map(c => {
+          const safe = c.char.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          return c.correct ? safe : `<span class="typed-char-err">${safe}</span>`;
+        });
+        span.innerHTML = htmlParts.join('');
+      }
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function autoScrollReferenceViewport(activeSpan) {
+      // Automatic paragraph scrolling is OFF by default per user preference
+      if (!appState.autoScrollRef || !activeSpan) return;
+      const container = document.getElementById('referenceViewport');
+      const cRect = container.getBoundingClientRect();
+      const sRect = activeSpan.getBoundingClientRect();
+      const relTop = sRect.top - cRect.top;
+      const relBottom = sRect.bottom - cRect.top;
+      if (relBottom > cRect.height - 28) {
+        container.scrollTop += (relBottom - cRect.height + 44);
+      } else if (relTop < 16) {
+        container.scrollTop += (relTop - 24);
+      }
+    }
+
+    // =========================================================================
+    // 12. MATHEMATICAL SCORING, TELEMETRY & SARIKA PENALTY ENGINE
+    // =========================================================================
+    function computeLiveMetrics() {
+      const nTarget = appState.flatCodepoints.length || 1;
+      const cCorrect = appState.correctStrokes;
+      const eStrokes = appState.wrongStrokes;
+      const kTotal = cCorrect + eStrokes;
+
+      const elapsedMinutes = Math.max(appState.elapsedMs / 60000, 1 / 600); // Avoid div-by-zero in first 100ms
+      const penaltyExact = eStrokes / 5.0;
+      const penaltyFloor = Math.floor(eStrokes / 5);
+
+      const grossCpm = appState.elapsedMs > 0 ? (cCorrect / elapsedMinutes) : 0;
+      const netChars = Math.max(0, cCorrect - penaltyExact);
+      const netCpm = appState.elapsedMs > 0 ? (netChars / elapsedMinutes) : 0;
+
+      const grossWpm = grossCpm / 5.0;
+      const netWpm = netCpm / 5.0;
+
+      const accuracy = kTotal === 0 ? 100.0 : (cCorrect / kTotal) * 100.0;
+      const completedPct = (cCorrect / nTarget) * 100.0;
+      const qualifiedPhase2 = completedPct >= 60.0;
+
+      // Rhythm consistency via coefficient of variation
+      let rhythmPct = 100;
+      if (appState.interKeyLatencies.length >= 4) {
+        const recent = appState.interKeyLatencies.slice(-40);
+        const mean = recent.reduce((a, b) => a + b, 0) / recent.length;
+        const variance = recent.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / recent.length;
+        const stdDev = Math.sqrt(variance);
+        const cv = mean > 0 ? (stdDev / mean) : 0;
+        rhythmPct = Math.round(Math.max(0, Math.min(100, (1 - cv * 0.65) * 100)));
+      }
+
+      return {
+        nTarget, cCorrect, eStrokes, kTotal,
+        penaltyExact, penaltyFloor,
+        grossCpm, netCpm, grossWpm, netWpm,
+        accuracy, completedPct, qualifiedPhase2, rhythmPct
+      };
+    }
+
+    function updateTelemetryDashboard() {
+      const m = computeLiveMetrics();
+
+      document.getElementById('hudNetCpm').textContent = m.netCpm.toFixed(1);
+      document.getElementById('hudGrossCpm').textContent = `Gross: ${m.grossCpm.toFixed(1)}`;
+      document.getElementById('hdrWpmSub').textContent = `${m.netWpm.toFixed(1)} WPM`;
+
+      const accEl = document.getElementById('hudAccuracy');
+      accEl.textContent = `${m.accuracy.toFixed(1)}%`;
+      if (m.accuracy >= 96) accEl.style.color = 'var(--accent-primary)';
+      else if (m.accuracy >= 90) accEl.style.color = 'var(--accent-amber)';
+      else accEl.style.color = 'var(--accent-crimson)';
+
+      document.getElementById('hudKeystrokes').textContent = `${m.cCorrect} / ${m.kTotal} keys`;
+      document.getElementById('hudErrors').textContent = `${m.eStrokes}`;
+      document.getElementById('hudPenaltyDeduct').textContent = `Penalty: -${m.penaltyExact.toFixed(1)} chars`;
+
+      // Update 5-dot penalty indicator
+      const remDots = m.eStrokes % 5;
+      const dots = document.querySelectorAll('#penaltyDots .penalty-dot');
+      dots.forEach((d, idx) => {
+        if (idx < remDots) d.classList.add('filled');
+        else d.classList.remove('filled');
+      });
+
+      // Completion & 60% Qualification Gate
+      document.getElementById('hudCompletionPct').textContent = `${m.completedPct.toFixed(1)}%`;
+      const fillEl = document.getElementById('hudProgressFill');
+      fillEl.style.width = `${Math.min(100, m.completedPct)}%`;
+      const qualStatusEl = document.getElementById('hudQualStatus');
+      if (m.qualifiedPhase2) {
+        fillEl.classList.add('qualified');
+        qualStatusEl.textContent = '✓ Qualified (>=60%)';
+        qualStatusEl.style.color = 'var(--accent-primary)';
+      } else {
+        fillEl.classList.remove('qualified');
+        qualStatusEl.textContent = 'Gate: 60%';
+        qualStatusEl.style.color = 'var(--accent-amber)';
+      }
+
+      // Footer Telemetry
+      const curGIdx = appState.currentCpIndex < appState.flatCodepoints.length
+        ? appState.flatCodepoints[appState.currentCpIndex].graphemeIdx + 1
+        : appState.graphemes.length;
+      document.getElementById('ftrCharIndex').textContent =
+        `Char ${appState.currentCpIndex} / ${m.nTarget} (Grapheme ${curGIdx} / ${appState.graphemes.length})`;
+      document.getElementById('ftrRhythm').textContent = `${m.rhythmPct}%`;
+      document.getElementById('ftrLatency').textContent = `${appState.lastLatencyMs} ms`;
+    }
+
+    // =========================================================================
+    // 13. TIMERS, SPARKLINE & END-OF-TEST OFFICIAL SCORECARD
+    // =========================================================================
+    function formatTimerText(secFloat) {
+      const totalTenths = Math.max(0, Math.floor(secFloat * 10));
+      const mins = Math.floor(totalTenths / 600);
+      const secs = Math.floor((totalTenths % 600) / 10);
+      const tenths = totalTenths % 10;
+      return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}.${tenths}`;
+    }
+
+    function updateTimerDisplayOnly() {
+      const timerEl = document.getElementById('hudTimerDisplay');
+      timerEl.classList.remove('timer-warn', 'timer-critical');
+
+      if (appState.timerDurationSec === 0) {
+        // Untimed Zen Mode counts up
+        const elapsedSec = appState.elapsedMs / 1000;
+        timerEl.textContent = formatTimerText(elapsedSec);
+        document.getElementById('hudTimerLabel').textContent = 'ZEN ELAPSED';
+      } else {
+        const remainingSec = Math.max(0, appState.timerDurationSec - (appState.elapsedMs / 1000));
+        timerEl.textContent = formatTimerText(remainingSec);
+        document.getElementById('hudTimerLabel').textContent = `TIMER (${Math.round(appState.timerDurationSec / 60)}m)`;
+        if (appState.sessionActive) {
+          if (remainingSec <= 15) timerEl.classList.add('timer-critical');
+          else if (remainingSec <= 60) timerEl.classList.add('timer-warn');
+        }
+      }
+    }
+
+    function startSessionTimers() {
+      if (appState.sessionActive) return;
+      appState.sessionActive = true;
+      appState.startTimeMs = performance.now() - appState.elapsedMs;
+      appState.lastKeystrokeMs = performance.now();
+      document.getElementById('hudTimerState').textContent = '🟢 Active Session';
+
+      if (appState.timerIntervalId) clearInterval(appState.timerIntervalId);
+      appState.timerIntervalId = setInterval(() => {
+        appState.elapsedMs = performance.now() - appState.startTimeMs;
+        updateTimerDisplayOnly();
+        updateTelemetryDashboard();
+
+        if (appState.timerDurationSec > 0 && appState.elapsedMs >= appState.timerDurationSec * 1000) {
+          appState.elapsedMs = appState.timerDurationSec * 1000;
+          updateTimerDisplayOnly();
+          completeSession('Your Time is Over (സമയം അവസാനിച്ചു)!');
+        }
+      }, 100);
+
+      if (appState.sparklineIntervalId) clearInterval(appState.sparklineIntervalId);
+      appState.sparklineIntervalId = setInterval(() => {
+        const m = computeLiveMetrics();
+        appState.sparklineHistory.push(m.netCpm);
+        if (appState.sparklineHistory.length > 60) appState.sparklineHistory.shift();
+        drawSparkline();
+      }, 1000);
+    }
+
+    function stopSessionTimers() {
+      if (appState.timerIntervalId) {
+        clearInterval(appState.timerIntervalId);
+        appState.timerIntervalId = null;
+      }
+      if (appState.sparklineIntervalId) {
+        clearInterval(appState.sparklineIntervalId);
+        appState.sparklineIntervalId = null;
+      }
+    }
+
+    function drawSparkline() {
+      const canvas = document.getElementById('cpmSparkline');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+
+      const data = appState.sparklineHistory;
+      if (data.length < 2) return;
+
+      const maxVal = Math.max(150, ...data);
+      ctx.beginPath();
+      ctx.strokeStyle = '#10B981';
+      ctx.lineWidth = 1.8;
+
+      data.forEach((val, idx) => {
+        const x = (idx / Math.max(1, data.length - 1)) * (w - 4) + 2;
+        const y = h - 3 - ((val / maxVal) * (h - 6));
+        if (idx === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+    }
+
+    function completeSession(reasonTitle) {
+      stopSessionTimers();
+      appState.sessionActive = false;
+      appState.sessionFinished = true;
+      document.getElementById('hudTimerState').textContent = '🏁 Finished';
+      playKeySound('fanfare');
+
+      const m = computeLiveMetrics();
+      const passage = getCurrentPassageObj();
+
+      // Save to Historical Analytics in localStorage
+      const historyList = loadStorage('sarika_session_history', []);
+      historyList.push({
+        timestamp: new Date().toLocaleString(),
+        candidateName: appState.candidateName,
+        registerNumber: appState.registerNumber,
+        passageTitle: passage.title,
+        netCpm: Number(m.netCpm.toFixed(2)),
+        grossCpm: Number(m.grossCpm.toFixed(2)),
+        accuracy: Number(m.accuracy.toFixed(2)),
+        completedPct: Number(m.completedPct.toFixed(2)),
+        correctChars: m.cCorrect,
+        wrongStrokes: m.eStrokes
+      });
+      saveStorage('sarika_session_history', historyList);
+
+      // Save cumulative weak characters for targeted drills
+      const globalMistakes = loadStorage('sarika_weak_chars', {});
+      Object.entries(appState.charTelemetry).forEach(([ch, stat]) => {
+        if (stat.errorCount > 0) {
+          globalMistakes[ch] = (globalMistakes[ch] || 0) + stat.errorCount;
+        }
+      });
+      saveStorage('sarika_weak_chars', globalMistakes);
+
+      // Populate Scorecard Modal
+      document.getElementById('scoreModalTitle').textContent = `🏆 ${reasonTitle} // മൂല്യനിർണ്ണയ ഫലം`;
+      document.getElementById('scCandidateLine').textContent =
+        `Candidate: ${appState.candidateName} | Reg No: ${appState.registerNumber}`;
+      document.getElementById('scPassageLine').textContent = `Passage: ${passage.title}`;
+
+      const qualBadge = document.getElementById('scQualificationBadge');
+      if (m.qualifiedPhase2) {
+        qualBadge.textContent = `✓ Phase 2 Formatting Qualified (യോഗ്യത നേടി: ${m.completedPct.toFixed(1)}% >= 60%)`;
+        qualBadge.style.background = 'var(--accent-primary-soft)';
+        qualBadge.style.color = 'var(--accent-primary)';
+        qualBadge.style.borderColor = 'var(--accent-primary)';
+      } else {
+        qualBadge.textContent = `✗ Phase 2 Not Qualified (യോഗ്യത നേടിയില്ല: ${m.completedPct.toFixed(1)}% < 60%)`;
+        qualBadge.style.background = 'var(--accent-crimson-soft)';
+        qualBadge.style.color = 'var(--accent-crimson)';
+        qualBadge.style.borderColor = 'var(--accent-crimson)';
+      }
+
+      document.getElementById('scNetCpm').textContent = m.netCpm.toFixed(2);
+      document.getElementById('scNetWpm').textContent = `${m.netWpm.toFixed(2)} Net WPM`;
+      document.getElementById('scGrossCpm').textContent = m.grossCpm.toFixed(2);
+      document.getElementById('scGrossWpm').textContent = `${m.grossWpm.toFixed(2)} Gross WPM`;
+      document.getElementById('scAccuracy').textContent = `${m.accuracy.toFixed(2)}%`;
+      document.getElementById('scStrokeSummary').textContent = `${m.cCorrect} Correct / ${m.kTotal} Total Keys`;
+      document.getElementById('scPenaltyExact').textContent = `-${m.penaltyExact.toFixed(2)} chars`;
+      document.getElementById('scPenaltyFloor').textContent = `Integer Floor: -${m.penaltyFloor} chars (${m.eStrokes} wrong strokes)`;
+      document.getElementById('scCompletedPct').textContent = `${m.completedPct.toFixed(2)}%`;
+      document.getElementById('scElapsedTime').textContent = `Elapsed: ${formatTimerText(appState.elapsedMs / 1000)}`;
+      document.getElementById('scRegFileName').textContent = `${appState.registerNumber || 'candidate'}.txt`;
+
+      // Populate Top 5 Slowest / Most Error-Prone Characters Table
+      const tbody = document.getElementById('scDiagnosticTableBody');
+      tbody.innerHTML = '';
+      const entries = Object.entries(appState.charTelemetry).map(([ch, st]) => {
+        const avgLat = st.count > 0 ? Math.round(st.totalLatencyMs / st.count) : 0;
+        const scoreWeight = st.errorCount * 1000 + avgLat;
+        return { ch, errorCount: st.errorCount, avgLat, scoreWeight };
+      }).sort((a, b) => b.scoreWeight - a.scoreWeight).slice(0, 5);
+
+      if (entries.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color: var(--text-muted);">No keystrokes recorded in this session.</td></tr>`;
+      } else {
+        entries.forEach(item => {
+          const hex = 'U+' + item.ch.codePointAt(0).toString(16).toUpperCase().padStart(4, '0');
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td style="font-family: var(--font-ml); font-size: 18px; font-weight: 700;">${item.ch === ' ' ? '␣ (Space)' : item.ch}</td>
+            <td style="font-family: var(--font-mono);">${hex}</td>
+            <td style="font-family: var(--font-mono); color: var(--accent-blue);">${getKeyHintForCodepoint(item.ch)}</td>
+            <td style="color: ${item.errorCount > 0 ? 'var(--accent-crimson)' : 'var(--text-secondary)'}; font-weight: 700;">${item.errorCount} errors</td>
+            <td style="font-family: var(--font-mono);">${item.avgLat} ms</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      document.getElementById('scorecardModal').classList.add('open');
+    }
+
+    // =========================================================================
+    // 14. INTERACTIVE PASSAGE STUDIO (LIVE EDIT, SANITIZE, SAVE, .TXT IMPORT/EXPORT)
+    // =========================================================================
+    let studioHighlightActive = false;
+
+    function openPassageStudio(clearForNew) {
+      const modal = document.getElementById('passageStudioModal');
+      const titleInp = document.getElementById('studioPassageTitle');
+      const catSel = document.getElementById('studioPassageCategory');
+      const txtArea = document.getElementById('studioTextarea');
+      const badge = document.getElementById('studioSanitizeBadge');
+      badge.textContent = '';
+
+      if (clearForNew) {
+        const customCount = appState.passages.filter(p => p.id.startsWith('custom-')).length + 1;
+        titleInp.value = `എന്റെ പരിശീലന ഖണ്ഡിക - ${customCount}`;
+        catSel.value = 'Level 6 — User Custom & Mistake-Targeted Passages (എന്റെ സ്വന്തം ഖണ്ഡികകൾ)';
+        txtArea.value = '';
+      } else {
+        const cur = getCurrentPassageObj();
+        titleInp.value = cur.title;
+        catSel.value = cur.category;
+        txtArea.value = cur.text;
+      }
+
+      updateStudioLiveInspector();
+      modal.classList.add('open');
+      txtArea.focus();
+    }
+
+    function updateStudioLiveInspector() {
+      const raw = document.getElementById('studioTextarea').value;
+      const stats = inspectPassageText(raw);
+
+      document.getElementById('studioStatCodepoints').textContent = stats.codepointCount.toLocaleString();
+      document.getElementById('studioStatGraphemes').textContent = stats.graphemeCount.toLocaleString();
+      document.getElementById('studioStatWords').textContent = stats.wordCount.toLocaleString();
+      document.getElementById('studioStatAtomicChillus').textContent = stats.atomicChillus.toLocaleString();
+      document.getElementById('studioStatLegacyZwj').textContent = stats.legacyZwjCount.toLocaleString();
+
+      const previewBox = document.getElementById('studioHighlightPreview');
+      if (studioHighlightActive) {
+        previewBox.classList.add('visible');
+        const graphemes = segmentMalayalamGraphemes(raw);
+        const htmlTokens = graphemes.map(g => {
+          const safe = g.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          if (/[\u0D7A-\u0D7F]/.test(g)) {
+            return `<span class="hl-chillu" title="Atomic Chillu">${safe}</span>`;
+          }
+          if (/[\u0D23\u0D28\u0D30\u0D32\u0D33\u0D15]\u0D4D\u200D/.test(g)) {
+            return `<span class="hl-legacy-zwj" title="Legacy ZWJ Chillu - Click Auto-Convert!">${safe}</span>`;
+          }
+          if (/\u0D4D/.test(g) && g.length > 2) {
+            return `<span class="hl-conjunct" title="Koottaksharam / Conjunct">${safe}</span>`;
+          }
+          return safe;
+        });
+        previewBox.innerHTML = htmlTokens.join('');
+      } else {
+        previewBox.classList.remove('visible');
+      }
+    }
+
+    function synthesizeWeakestCharactersDrill() {
+      const globalMistakes = loadStorage('sarika_weak_chars', {});
+      // Also merge current session mistakes
+      Object.entries(appState.charTelemetry).forEach(([ch, st]) => {
+        if (st.errorCount > 0) {
+          globalMistakes[ch] = (globalMistakes[ch] || 0) + st.errorCount;
+        }
+      });
+
+      const weakSorted = Object.entries(globalMistakes)
+        .filter(([ch]) => ch.trim().length > 0)
+        .sort((a, b) => b[1] - a[1])
+        .map(e => e[0])
+        .slice(0, 8);
+
+      const vocabularyPool = [
+        'അവൻ', 'അവർ', 'മലയാളി', 'കൺമണി', 'പാൽ', 'കാൾ', 'വാൾ', 'സർക്കാർ',
+        'സ്പോർട്സ്', 'സയൻസ്', 'കമ്പ്യൂട്ടർ', 'ലിറ്റിൽ', 'കൈറ്റ്സ്', 'സ്കൂൾ', 'തൊഴിൽ',
+        'കലാകാരൻ', 'വിദ്യാർത്ഥികൾ', 'സോഫ്റ്റ്\u200cവെയർ', 'പ്രതിജ്ഞ', 'ശാസ്ത്രോത്സവം',
+        'വ്യക്തിത്വം', 'സ്വാതന്ത്ര്യം', 'ഭൂമിശാസ്ത്രം', 'പശ്ചിമഘട്ടം', 'നിർമ്മിതബുദ്ധി',
+        'ബഹിരാകാശം', 'ഗവേഷണം', 'മനോഹരം', 'പൊതുവിദ്യാഭ്യാസം', 'സാങ്കേതികവിദ്യ'
+      ];
+
+      let matchingWords = [];
+      if (weakSorted.length > 0) {
+        matchingWords = vocabularyPool.filter(w => weakSorted.some(ch => w.includes(ch)));
+      }
+      if (matchingWords.length < 6) {
+        matchingWords = vocabularyPool;
+      }
+
+      let drillSentences = [];
+      let totalLen = 0;
+      let idx = 0;
+      while (totalLen < 310) {
+        const w = matchingWords[idx % matchingWords.length];
+        drillSentences.push(w);
+        totalLen += w.length + 1;
+        idx++;
+      }
+      const drillText = sanitizeToSarikaStandard(drillSentences.join(' ') + '.').text;
+
+      const customDrillId = 'lvl6-weakest-drill';
+      const existingIdx = appState.passages.findIndex(p => p.id === customDrillId);
+      const drillObj = {
+        id: customDrillId,
+        title: '6.2 എന്റെ തെറ്റുകൾക്കുള്ള പ്രത്യേക പരിശീലനം (Targeted Weak-Character Drill)',
+        category: 'Level 6 — User Custom & Mistake-Targeted Passages (എന്റെ സ്വന്തം ഖണ്ഡികകൾ)',
+        tier: 'Custom',
+        recommendedMinutes: 5,
+        text: drillText
+      };
+
+      if (existingIdx >= 0) appState.passages[existingIdx] = drillObj;
+      else appState.passages.push(drillObj);
+
+      populatePassageDropdown();
+      loadPassageIntoArena(customDrillId);
+    }
+
+    // =========================================================================
+    // 15. FILE DOWNLOAD HELPERS (.TXT, .JSON, .CSV)
+    // =========================================================================
+    function triggerFileDownload(filename, contentStr, mimeType) {
+      const blob = new Blob([contentStr], { type: mimeType || 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 150);
+    }
+
+    // =========================================================================
+    // 16. CUSTOM CHILLU KEY-MAPPER & INSCRIPT TABLE RENDERING
+    // =========================================================================
+    function renderKeyMapperModal() {
+      const grid = document.getElementById('customChilluMapperGrid');
+      grid.innerHTML = '';
+
+      Object.entries(ATOMIC_CHILLUS).forEach(([chilluChar, meta]) => {
+        const bind = appState.customChilluBindings[chilluChar] || DEFAULT_CUSTOM_CHILLU_MAP[chilluChar];
+        const card = document.createElement('div');
+        card.className = 'chillu-bind-card';
+        const isListening = appState.listeningForChilluBind === chilluChar;
+
+        card.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="chillu-big">${chilluChar}</span>
+            <div>
+              <div style="font-size: 12px; font-weight: 700;">${meta.name}</div>
+              <div style="font-size: 10px; font-family: var(--font-mono); color: var(--text-muted);">${meta.hex}</div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-sm ${isListening ? 'btn-amber' : ''}" data-bind-chillu="${chilluChar}">
+            ${isListening ? 'Press Any Key...' : bind.display}
+          </button>
+        `;
+        grid.appendChild(card);
+      });
+
+      grid.querySelectorAll('button[data-bind-chillu]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const ch = btn.getAttribute('data-bind-chillu');
+          appState.listeningForChilluBind = ch;
+          renderKeyMapperModal();
+        });
+      });
+
+      // Populate Inscript Hardware Reference Table
+      const tbody = document.getElementById('inscriptReferenceTableBody');
+      if (tbody.children.length === 0) {
+        Object.entries(BASE_INSCRIPT_MAP).forEach(([code, entry]) => {
+          if (code === 'Space') return;
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td style="font-family: var(--font-mono); font-weight: 700;">${entry.label} (${code})</td>
+            <td style="font-family: var(--font-ml); font-size: 16px;">${entry.unshift || '—'}</td>
+            <td style="font-family: var(--font-ml); font-size: 16px;">${entry.shift || '—'}</td>
+            <td style="font-family: var(--font-ml); font-size: 16px;">${entry.altgr || '—'}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+    }
+
+    // =========================================================================
+    // 17. HISTORICAL ANALYTICS & TREND CANVAS CHART
+    // =========================================================================
+    function openAnalyticsModal() {
+      const historyList = loadStorage('sarika_session_history', []);
+      document.getElementById('histTotalSessions').textContent = historyList.length;
+
+      let bestCpm = 0;
+      let totalChars = 0;
+      let sumAcc = 0;
+
+      historyList.forEach(item => {
+        if (item.netCpm > bestCpm) bestCpm = item.netCpm;
+        totalChars += (item.correctChars || 0);
+        sumAcc += (item.accuracy || 100);
+      });
+
+      document.getElementById('histBestCpm').textContent = bestCpm.toFixed(1);
+      document.getElementById('histTotalChars').textContent = totalChars.toLocaleString();
+      document.getElementById('histAvgAcc').textContent =
+        historyList.length > 0 ? `${(sumAcc / historyList.length).toFixed(1)}%` : '100.0%';
+
+      const tbody = document.getElementById('historyTableBody');
+      tbody.innerHTML = '';
+      if (historyList.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color: var(--text-muted);">No completed sessions yet. Complete a practice or exam session to view trends!</td></tr>`;
+      } else {
+        historyList.slice().reverse().forEach(item => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${item.timestamp}</td>
+            <td>${item.candidateName} (${item.registerNumber})</td>
+            <td style="font-family: var(--font-ml);">${item.passageTitle}</td>
+            <td style="font-family: var(--font-mono); font-weight: 700; color: var(--accent-primary);">${item.netCpm.toFixed(1)}</td>
+            <td style="font-family: var(--font-mono);">${item.accuracy.toFixed(1)}%</td>
+            <td style="font-family: var(--font-mono);">${item.completedPct.toFixed(1)}%</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      drawHistoryTrendChart(historyList);
+      document.getElementById('analyticsModal').classList.add('open');
+    }
+
+    function drawHistoryTrendChart(historyList) {
+      const canvas = document.getElementById('historyTrendCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+
+      // Draw subtle grid lines
+      ctx.strokeStyle = 'rgba(148, 163, 184, 0.15)';
+      ctx.lineWidth = 1;
+      for (let i = 1; i <= 4; i++) {
+        const y = (h / 5) * i;
+        ctx.beginPath();
+        ctx.moveTo(30, y);
+        ctx.lineTo(w - 10, y);
+        ctx.stroke();
+      }
+
+      if (historyList.length === 0) {
+        ctx.fillStyle = '#94A3B8';
+        ctx.font = '12px sans-serif';
+        ctx.fillText('Complete a typing session to plot your Net CPM (Green) and Accuracy % (Blue) progression.', 140, h / 2);
+        return;
+      }
+
+      const recent = historyList.slice(-20);
+      const maxCpm = Math.max(200, ...recent.map(r => r.netCpm));
+
+      // Plot Net CPM Line (Emerald)
+      ctx.beginPath();
+      ctx.strokeStyle = '#10B981';
+      ctx.lineWidth = 2.5;
+      recent.forEach((r, idx) => {
+        const x = recent.length === 1 ? w / 2 : 40 + (idx / (recent.length - 1)) * (w - 60);
+        const y = h - 20 - ((r.netCpm / maxCpm) * (h - 40));
+        if (idx === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+
+      // Plot Accuracy Line (Sky Blue)
+      ctx.beginPath();
+      ctx.strokeStyle = '#38BDF8';
+      ctx.lineWidth = 2;
+      recent.forEach((r, idx) => {
+        const x = recent.length === 1 ? w / 2 : 40 + (idx / (recent.length - 1)) * (w - 60);
+        const y = h - 20 - ((r.accuracy / 100) * (h - 40));
+        if (idx === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+    }
+
+    function openCandidateModal() {
+      document.getElementById('inpCandidateName').value = appState.candidateName;
+      document.getElementById('inpRegisterNumber').value = appState.registerNumber;
+      document.getElementById('inpSessionMode').value = appState.sessionMode;
+      document.getElementById('candAuthError').style.display = 'none';
+      document.getElementById('candidateModal').classList.add('open');
+    }
+
+    // =========================================================================
+    // 18. EVENT LISTENERS & INITIALIZATION WIRING
+    // =========================================================================
+    window.addEventListener('DOMContentLoaded', () => {
+      initPassageLibrary();
+      loadPassageIntoArena(appState.currentPassageId);
+      updateTimerDisplayOnly();
+
+      const typingArea = document.getElementById('typingMirrorArea');
+      const hiddenIme = document.getElementById('hiddenImeInput');
+
+      // Prevent paste in active typing box
+      typingArea.addEventListener('paste', e => e.preventDefault());
+      hiddenIme.addEventListener('paste', e => e.preventDefault());
+
+      // Clicking typing box focuses appropriate target
+      document.getElementById('typingBoxWrapper').addEventListener('click', () => {
+        if (appState.inputEngine === 'native') {
+          hiddenIme.focus();
+        } else {
+          typingArea.focus();
+        }
+      });
+
+      // Global Function Shortcuts (Esc, F2, F3, F4) & Custom Chillu Key-Mapper Listener
+      window.addEventListener('keydown', e => {
+        // If user is binding a custom Atomic Chillu in Modal 3
+        if (appState.listeningForChilluBind) {
+          e.preventDefault();
+          if (['ShiftLeft', 'ShiftRight', 'ControlLeft', 'ControlRight', 'AltLeft', 'AltRight', 'MetaLeft', 'MetaRight'].includes(e.code)) {
+            return;
+          }
+          const shift = e.shiftKey;
+          const altgr = e.getModifierState && (e.getModifierState('AltGraph') || (e.altKey && e.ctrlKey));
+          const parts = [];
+          if (altgr) parts.push('AltGr');
+          if (shift) parts.push('Shift');
+          parts.push(e.code.replace('Key', '').replace('Digit', ''));
+
+          appState.customChilluBindings[appState.listeningForChilluBind] = {
+            code: e.code,
+            shift,
+            altgr,
+            display: parts.join(' + ')
+          };
+          saveStorage('sarika_custom_chillus', appState.customChilluBindings);
+          appState.listeningForChilluBind = null;
+          appState.chilluProfile = 'custom';
+          document.getElementById('chilluProfileSelect').value = 'custom';
+          renderKeyMapperModal();
+          updateDecompositionHud();
+          return;
+        }
+
+        // Ignore global shortcuts if a modal is open
+        const anyModalOpen = document.querySelector('.modal-backdrop.open');
+        if (anyModalOpen) {
+          if (e.key === 'Escape') {
+            anyModalOpen.classList.remove('open');
+          }
+          return;
+        }
+
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          loadPassageIntoArena(appState.currentPassageId);
+          return;
+        }
+        if (e.key === 'F2') {
+          e.preventDefault();
+          document.getElementById('btnToggleHints').click();
+          return;
+        }
+        if (e.key === 'F3') {
+          e.preventDefault();
+          openPassageStudio(false);
+          return;
+        }
+        if (e.key === 'F4') {
+          e.preventDefault();
+          const sel = document.getElementById('inputEngineSelect');
+          sel.value = sel.value === 'hardware' ? 'native' : 'hardware';
+          sel.dispatchEvent(new Event('change'));
+          return;
+        }
+
+        // Don't intercept if typing inside header inputs or selects
+        if (['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement.tagName) && document.activeElement.id !== 'hiddenImeInput') {
+          return;
+        }
+
+        // Backspace in Free-Flow Mode
+        if (e.key === 'Backspace') {
+          e.preventDefault();
+          handleFreeFlowBackspace();
+          return;
+        }
+
+        // Mode A: Built-In Hardware Inscript Keycode Interceptor
+        if (appState.inputEngine === 'hardware') {
+          if (e.ctrlKey || e.metaKey) return; // Allow browser shortcuts like Ctrl+C
+          if (['Shift', 'Control', 'Alt', 'AltGraph', 'CapsLock', 'Tab', 'Enter', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+            return;
+          }
+
+          // Optional KITE Consonant + ് (d) + ] -> Atomic Chillu conversion
+          if (appState.autoConvertZwjChillu && e.code === 'BracketRight' && !e.shiftKey) {
+            const curSlot = appState.flatCodepoints[appState.currentCpIndex];
+            if (curSlot && ATOMIC_CHILLUS[curSlot.char]) {
+              e.preventDefault();
+              processCandidateInputString(curSlot.char);
+              return;
+            }
+          }
+
+          const mapped = translateHardwareKeyEvent(e);
+          if (mapped !== null && mapped !== '') {
+            e.preventDefault();
+            processCandidateInputString(mapped);
+          }
+        }
+      });
+
+      // Mode B: Native OS IME Pass-Through Listener
+      hiddenIme.addEventListener('input', () => {
+        if (appState.inputEngine !== 'native') {
+          hiddenIme.value = '';
+          return;
+        }
+        const val = hiddenIme.value;
+        hiddenIme.value = '';
+        if (!val) return;
+
+        // Detect accidental English OS layout
+        if (/^[a-zA-Z]+$/.test(val)) {
+          document.getElementById('osEnglishBanner').classList.add('visible');
+        } else {
+          document.getElementById('osEnglishBanner').classList.remove('visible');
+        }
+
+        const normalized = val.normalize('NFC');
+        processCandidateInputString(normalized);
+      });
+
+      // Header Controls Wiring
+      document.getElementById('passageSelect').addEventListener('change', e => {
+        loadPassageIntoArena(e.target.value);
+        typingArea.focus();
+      });
+
+      document.getElementById('quickTimerSelect').addEventListener('change', e => {
+        appState.timerDurationSec = parseInt(e.target.value, 10);
+        loadPassageIntoArena(appState.currentPassageId);
+        updateTimerDisplayOnly();
+      });
+
+      document.getElementById('inputEngineSelect').addEventListener('change', e => {
+        appState.inputEngine = e.target.value;
+        document.getElementById('osEnglishBanner').classList.remove('visible');
+        if (appState.inputEngine === 'native') {
+          hiddenIme.focus();
+        } else {
+          typingArea.focus();
+        }
+      });
+
+      document.getElementById('btnSwitchToHardwareEngine').addEventListener('click', () => {
+        appState.inputEngine = 'hardware';
+        document.getElementById('inputEngineSelect').value = 'hardware';
+        document.getElementById('osEnglishBanner').classList.remove('visible');
+        typingArea.focus();
+      });
+
+      document.getElementById('chilluProfileSelect').addEventListener('change', e => {
+        appState.chilluProfile = e.target.value;
+        if (appState.chilluProfile === 'custom') {
+          renderKeyMapperModal();
+          document.getElementById('keyMapperModal').classList.add('open');
+        }
+        updateDecompositionHud();
+      });
+
+      document.getElementById('enforcementModeSelect').addEventListener('change', e => {
+        appState.enforcementMode = e.target.value;
+        loadPassageIntoArena(appState.currentPassageId);
+      });
+
+      document.getElementById('fontFamilySelect').addEventListener('change', e => {
+        if (e.target.value === 'custom') {
+          document.getElementById('customFontModal').classList.add('open');
+        } else {
+          document.documentElement.style.setProperty('--font-ml', e.target.value);
+        }
+      });
+
+      document.getElementById('btnApplyCustomFont').addEventListener('click', () => {
+        const customName = document.getElementById('inpCustomFontName').value.trim();
+        if (customName) {
+          document.documentElement.style.setProperty('--font-ml', `'${customName}', sans-serif`);
+        }
+        document.getElementById('customFontModal').classList.remove('open');
+      });
+
+      document.getElementById('btnCloseCustomFontModal').addEventListener('click', () => {
+        document.getElementById('customFontModal').classList.remove('open');
+      });
+
+      document.getElementById('themeSelect').addEventListener('change', e => {
+        document.documentElement.setAttribute('data-theme', e.target.value);
+      });
+
+      document.getElementById('btnAudioToggle').addEventListener('click', e => {
+        appState.audioEnabled = !appState.audioEnabled;
+        e.currentTarget.textContent = appState.audioEnabled ? '🔊 Audio' : '🔇 Muted';
+      });
+
+      document.getElementById('btnResetSession').addEventListener('click', () => {
+        loadPassageIntoArena(appState.currentPassageId);
+        typingArea.focus();
+      });
+
+      // Font Size A- / A+
+      let currentFontPx = 24;
+      document.getElementById('btnFontDec').addEventListener('click', () => {
+        currentFontPx = Math.max(18, currentFontPx - 2);
+        document.documentElement.style.setProperty('--typing-font-size', currentFontPx + 'px');
+      });
+      document.getElementById('btnFontInc').addEventListener('click', () => {
+        currentFontPx = Math.min(34, currentFontPx + 2);
+        document.documentElement.style.setProperty('--typing-font-size', currentFontPx + 'px');
+      });
+
+      // Auto-Scroll Toggle (OFF by default)
+      document.getElementById('chkAutoScrollRef').addEventListener('change', e => {
+        appState.autoScrollRef = e.target.checked;
+        const lblSpan = e.target.nextElementSibling;
+        if (lblSpan) lblSpan.textContent = appState.autoScrollRef ? 'Auto-Scroll: ON' : 'Auto-Scroll: OFF';
+      });
+
+      // Decomposition HUD Controls
+      document.getElementById('chkConvertZwjChillu').addEventListener('change', e => {
+        appState.autoConvertZwjChillu = e.target.checked;
+      });
+
+      document.getElementById('btnToggleHints').addEventListener('click', e => {
+        appState.showHints = !appState.showHints;
+        const hud = document.getElementById('decompositionHud');
+        if (appState.showHints) {
+          hud.classList.remove('hidden-exam-mode');
+          e.currentTarget.textContent = '👁️ Hide Hints (Exam Mode)';
+        } else {
+          hud.classList.add('hidden-exam-mode');
+          e.currentTarget.textContent = '👁️ Show Hints (Dojo Mode)';
+        }
+      });
+
+      // Passage Studio Buttons
+      document.getElementById('btnHeaderEditPassage').addEventListener('click', () => openPassageStudio(false));
+      document.getElementById('btnEditThisText').addEventListener('click', () => openPassageStudio(false));
+      document.getElementById('btnNewCustomText').addEventListener('click', () => openPassageStudio(true));
+      document.getElementById('btnCloseStudioModal').addEventListener('click', () => {
+        document.getElementById('passageStudioModal').classList.remove('open');
+      });
+
+      document.getElementById('studioTextarea').addEventListener('input', updateStudioLiveInspector);
+
+      document.getElementById('btnStudioClearNew').addEventListener('click', () => {
+        const customCount = appState.passages.filter(p => p.id.startsWith('custom-')).length + 1;
+        document.getElementById('studioPassageTitle').value = `എന്റെ പരിശീലന ഖണ്ഡിക - ${customCount}`;
+        document.getElementById('studioPassageCategory').value = 'Level 6 — User Custom & Mistake-Targeted Passages (എന്റെ സ്വന്തം ഖണ്ഡികകൾ)';
+        document.getElementById('studioTextarea').value = '';
+        document.getElementById('studioSanitizeBadge').textContent = '✓ Cleared editor for new passage';
+        updateStudioLiveInspector();
+      });
+
+      document.getElementById('btnStudioSanitize').addEventListener('click', () => {
+        const raw = document.getElementById('studioTextarea').value;
+        const res = sanitizeToSarikaStandard(raw);
+        document.getElementById('studioTextarea').value = res.text;
+        document.getElementById('studioSanitizeBadge').textContent =
+          `✓ Converted ${res.zwjConvertedCount} legacy ZWJ chillus to Atomic Chillus and normalized NFC punctuation`;
+        updateStudioLiveInspector();
+      });
+
+      document.getElementById('btnStudioToggleHighlight').addEventListener('click', () => {
+        studioHighlightActive = !studioHighlightActive;
+        updateStudioLiveInspector();
+      });
+
+      // Local .txt File Loading (Direct & Studio)
+      document.getElementById('btnLoadTxtFileDirect').addEventListener('click', () => {
+        document.getElementById('directTxtFileInput').click();
+      });
+
+      document.getElementById('directTxtFileInput').addEventListener('change', e => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => {
+          const content = String(ev.target.result || '');
+          const sanitized = sanitizeToSarikaStandard(content);
+          openPassageStudio(true);
+          document.getElementById('studioPassageTitle').value = file.name.replace(/\.txt$/i, '');
+          document.getElementById('studioTextarea').value = sanitized.text;
+          document.getElementById('studioSanitizeBadge').textContent =
+            `✓ Loaded '${file.name}' (${sanitized.zwjConvertedCount} legacy chillus auto-converted to Atomic)`;
+          updateStudioLiveInspector();
+        };
+        reader.readAsText(file, 'UTF-8');
+        e.target.value = '';
+      });
+
+      document.getElementById('btnStudioOpenTxt').addEventListener('click', () => {
+        document.getElementById('studioTxtFileInput').click();
+      });
+
+      document.getElementById('studioTxtFileInput').addEventListener('change', e => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => {
+          const content = String(ev.target.result || '');
+          document.getElementById('studioPassageTitle').value = file.name.replace(/\.txt$/i, '');
+          document.getElementById('studioTextarea').value = content;
+          document.getElementById('studioSanitizeBadge').textContent = `✓ Loaded ${file.name}`;
+          updateStudioLiveInspector();
+        };
+        reader.readAsText(file, 'UTF-8');
+        e.target.value = '';
+      });
+
+      // Studio Save / Apply Actions
+      document.getElementById('btnStudioApplyNow').addEventListener('click', () => {
+        const rawText = document.getElementById('studioTextarea').value.trim();
+        if (!rawText) return;
+        const cur = getCurrentPassageObj();
+        cur.title = document.getElementById('studioPassageTitle').value.trim() || cur.title;
+        cur.text = sanitizeToSarikaStandard(rawText).text;
+        populatePassageDropdown();
+        loadPassageIntoArena(cur.id);
+        document.getElementById('passageStudioModal').classList.remove('open');
+      });
+
+      document.getElementById('btnStudioSaveOver').addEventListener('click', () => {
+        const rawText = document.getElementById('studioTextarea').value.trim();
+        if (!rawText) return;
+        const sanitized = sanitizeToSarikaStandard(rawText).text;
+        const newTitle = document.getElementById('studioPassageTitle').value.trim() || 'Edited Passage';
+        const newCat = document.getElementById('studioPassageCategory').value;
+        const cur = getCurrentPassageObj();
+
+        cur.title = newTitle;
+        cur.category = newCat;
+        cur.text = sanitized;
+
+        if (cur.id.startsWith('custom-')) {
+          const customSaved = loadStorage('sarika_custom_passages', []);
+          const idx = customSaved.findIndex(p => p.id === cur.id);
+          if (idx >= 0) customSaved[idx] = cur;
+          saveStorage('sarika_custom_passages', customSaved);
+        } else {
+          const overrides = loadStorage('sarika_factory_overrides', {});
+          overrides[cur.id] = { title: newTitle, text: sanitized };
+          saveStorage('sarika_factory_overrides', overrides);
+        }
+
+        populatePassageDropdown();
+        loadPassageIntoArena(cur.id);
+        document.getElementById('passageStudioModal').classList.remove('open');
+      });
+
+      document.getElementById('btnStudioSaveNew').addEventListener('click', () => {
+        const rawText = document.getElementById('studioTextarea').value.trim();
+        if (!rawText) return;
+        const sanitized = sanitizeToSarikaStandard(rawText).text;
+        const newTitle = document.getElementById('studioPassageTitle').value.trim() || 'എന്റെ പുതിയ ഖണ്ഡിക';
+        const newCat = document.getElementById('studioPassageCategory').value;
+        const newId = 'custom-' + Date.now();
+
+        const newPassageObj = {
+          id: newId,
+          title: newTitle,
+          category: newCat,
+          tier: 'Custom',
+          recommendedMinutes: 15,
+          text: sanitized
+        };
+
+        appState.passages.push(newPassageObj);
+        const customSaved = loadStorage('sarika_custom_passages', []);
+        customSaved.push(newPassageObj);
+        saveStorage('sarika_custom_passages', customSaved);
+
+        populatePassageDropdown();
+        loadPassageIntoArena(newId);
+        document.getElementById('passageStudioModal').classList.remove('open');
+      });
+
+      document.getElementById('btnStudioRestoreDefault').addEventListener('click', () => {
+        const curId = appState.currentPassageId;
+        const factoryOrig = FACTORY_PASSAGES.find(f => f.id === curId);
+        if (!factoryOrig) {
+          document.getElementById('studioSanitizeBadge').textContent = 'ℹ️ Custom passage has no factory original.';
+          return;
+        }
+        const overrides = loadStorage('sarika_factory_overrides', {});
+        delete overrides[curId];
+        saveStorage('sarika_factory_overrides', overrides);
+
+        const cur = getCurrentPassageObj();
+        cur.title = factoryOrig.title;
+        cur.text = factoryOrig.text;
+        document.getElementById('studioPassageTitle').value = cur.title;
+        document.getElementById('studioTextarea').value = cur.text;
+        document.getElementById('studioSanitizeBadge').textContent = '✓ Restored factory default text!';
+        updateStudioLiveInspector();
+        populatePassageDropdown();
+        loadPassageIntoArena(curId);
+      });
+
+      document.getElementById('btnStudioDeleteCustom').addEventListener('click', () => {
+        const curId = appState.currentPassageId;
+        if (!curId.startsWith('custom-')) {
+          document.getElementById('studioSanitizeBadge').textContent =
+            'ℹ️ Built-in passages cannot be deleted (use Restore Default instead).';
+          return;
+        }
+        appState.passages = appState.passages.filter(p => p.id !== curId);
+        const customSaved = loadStorage('sarika_custom_passages', []).filter(p => p.id !== curId);
+        saveStorage('sarika_custom_passages', customSaved);
+
+        appState.currentPassageId = appState.passages[0].id;
+        populatePassageDropdown();
+        loadPassageIntoArena(appState.currentPassageId);
+        document.getElementById('passageStudioModal').classList.remove('open');
+      });
+
+      document.getElementById('btnStudioExportTxt').addEventListener('click', () => {
+        const txt = document.getElementById('studioTextarea').value;
+        const titleSlug = (document.getElementById('studioPassageTitle').value || 'malayalam_passage')
+          .replace(/[^\w\u0D00-\u0D7F\-]+/g, '_');
+        triggerFileDownload(`${titleSlug}.txt`, txt, 'text/plain;charset=utf-8');
+      });
+
+      // Candidate Registration & Session Config Modal
+      document.getElementById('btnOpenRegModal').addEventListener('click', openCandidateModal);
+      document.getElementById('btnCloseCandModal').addEventListener('click', () => {
+        document.getElementById('candidateModal').classList.remove('open');
+      });
+
+      document.getElementById('inpCompetitionTier').addEventListener('change', e => {
+        const val = e.target.value;
+        if (val === 'subdistrict') {
+          document.getElementById('inpCustomMinutes').value = '15';
+          appState.currentPassageId = 'lvl4-subdistrict-a';
+        } else if (val === 'district') {
+          document.getElementById('inpCustomMinutes').value = '15';
+          appState.currentPassageId = 'lvl5-district-d';
+        }
+      });
+
+      document.getElementById('btnApplyCandidateConfig').addEventListener('click', () => {
+        const nameVal = document.getElementById('inpCandidateName').value.trim() || 'Practice Candidate';
+        const regVal = document.getElementById('inpRegisterNumber').value.trim() || 'LK2026-9042';
+        const modeVal = document.getElementById('inpSessionMode').value;
+        const passVal = document.getElementById('inpExamPassword').value;
+        const minsVal = Math.max(0, Math.min(60, parseInt(document.getElementById('inpCustomMinutes').value || '15', 10)));
+
+        if (modeVal === 'exam' && passVal !== 'pass') {
+          document.getElementById('candAuthError').style.display = 'block';
+          return;
+        }
+
+        appState.candidateName = nameVal;
+        appState.registerNumber = regVal;
+        appState.sessionMode = modeVal;
+        appState.examUnlocked = true;
+        appState.timerDurationSec = minsVal * 60;
+
+        document.getElementById('hdrCandidateName').textContent = nameVal;
+        document.getElementById('hdrRegNo').textContent = regVal;
+        document.getElementById('hdrModeTag').textContent = modeVal === 'exam' ? 'Exam' : 'Dojo';
+
+        populatePassageDropdown();
+        loadPassageIntoArena(appState.currentPassageId);
+        updateTimerDisplayOnly();
+        document.getElementById('candidateModal').classList.remove('open');
+
+        if (modeVal === 'exam') {
+          startSessionTimers();
+        }
+      });
+
+      // Key-Mapper Modal
+      document.getElementById('btnOpenKeyMapper').addEventListener('click', () => {
+        renderKeyMapperModal();
+        document.getElementById('keyMapperModal').classList.add('open');
+      });
+      document.getElementById('btnCloseKeyMapper').addEventListener('click', () => {
+        appState.listeningForChilluBind = null;
+        document.getElementById('keyMapperModal').classList.remove('open');
+      });
+      document.getElementById('btnSaveKeymapClose').addEventListener('click', () => {
+        appState.listeningForChilluBind = null;
+        document.getElementById('keyMapperModal').classList.remove('open');
+      });
+      document.getElementById('btnResetDefaultKeymap').addEventListener('click', () => {
+        appState.customChilluBindings = JSON.parse(JSON.stringify(DEFAULT_CUSTOM_CHILLU_MAP));
+        saveStorage('sarika_custom_chillus', appState.customChilluBindings);
+        renderKeyMapperModal();
+        updateDecompositionHud();
+      });
+
+      // Drill Weakest Characters Button (Arena & Scorecard)
+      document.getElementById('btnPracticeWeakest').addEventListener('click', synthesizeWeakestCharactersDrill);
+      document.getElementById('btnScorecardDrillMistakes').addEventListener('click', () => {
+        document.getElementById('scorecardModal').classList.remove('open');
+        synthesizeWeakestCharactersDrill();
+      });
+
+      // Active Box Finish & Download Typed File Actions
+      document.getElementById('btnFinishEarly').addEventListener('click', () => {
+        completeSession('Session Evaluated');
+      });
+
+      function exportCandidateTypedFile() {
+        const typedStr = appState.typedChars.map(c => c.char).join('');
+        const filename = `${appState.registerNumber || 'candidate'}.txt`;
+        triggerFileDownload(filename, typedStr, 'text/plain;charset=utf-8');
+      }
+
+      document.getElementById('btnDownloadTypedNow').addEventListener('click', exportCandidateTypedFile);
+      document.getElementById('btnExportTypedTxt').addEventListener('click', exportCandidateTypedFile);
+
+      document.getElementById('btnExportScorecardJson').addEventListener('click', () => {
+        const m = computeLiveMetrics();
+        const payload = {
+          candidateName: appState.candidateName,
+          registerNumber: appState.registerNumber,
+          passage: getCurrentPassageObj().title,
+          timestamp: new Date().toISOString(),
+          metrics: m,
+          characterTelemetry: appState.charTelemetry
+        };
+        triggerFileDownload(`${appState.registerNumber}_scorecard.json`, JSON.stringify(payload, null, 2), 'application/json');
+      });
+
+      document.getElementById('btnExportScorecardCsv').addEventListener('click', () => {
+        const m = computeLiveMetrics();
+        const csvLines = [
+          'Candidate Name,Register Number,Passage,Net CPM,Gross CPM,Net WPM,Accuracy %,Completed %,Correct Chars,Wrong Strokes,Penalty Chars,Phase 2 Qualified',
+          `"${appState.candidateName}","${appState.registerNumber}","${getCurrentPassageObj().title}",${m.netCpm.toFixed(2)},${m.grossCpm.toFixed(2)},${m.netWpm.toFixed(2)},${m.accuracy.toFixed(2)},${m.completedPct.toFixed(2)},${m.cCorrect},${m.eStrokes},${m.penaltyExact.toFixed(2)},${m.qualifiedPhase2 ? 'YES' : 'NO'}`
+        ];
+        triggerFileDownload(`${appState.registerNumber}_scorecard.csv`, csvLines.join('\n'), 'text/csv;charset=utf-8');
+      });
+
+      document.getElementById('btnCloseScorecard').addEventListener('click', () => {
+        document.getElementById('scorecardModal').classList.remove('open');
+      });
+      document.getElementById('btnScorecardRetry').addEventListener('click', () => {
+        document.getElementById('scorecardModal').classList.remove('open');
+        loadPassageIntoArena(appState.currentPassageId);
+      });
+
+      // Analytics Modal
+      document.getElementById('btnOpenAnalytics').addEventListener('click', openAnalyticsModal);
+      document.getElementById('btnCloseAnalytics').addEventListener('click', () => {
+        document.getElementById('analyticsModal').classList.remove('open');
+      });
+      document.getElementById('btnCloseAnalyticsFooter').addEventListener('click', () => {
+        document.getElementById('analyticsModal').classList.remove('open');
+      });
+      document.getElementById('btnClearHistory').addEventListener('click', () => {
+        saveStorage('sarika_session_history', []);
+        openAnalyticsModal();
+      });
+
+      // Focus typing area immediately
+      typingArea.focus();
+    });
+  </script>
+</body>
+</html>
